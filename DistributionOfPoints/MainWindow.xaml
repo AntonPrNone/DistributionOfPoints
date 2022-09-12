@@ -78,5 +78,6 @@
         <Button x:Name="ResetButton" Content="Reset" HorizontalAlignment="Left" Margin="264,314,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="White" BorderBrush="Red" Height="24" Width="44" Cursor="Hand" Click="ResetButton_Click"/>
         <Label Content="Skill points left:" HorizontalAlignment="Center" Margin="0,103,0,0" VerticalAlignment="Top" Foreground="White"/>
         <TextBox x:Name="SkillPointsTextBox" HorizontalAlignment="Center" Margin="0,134,0,0" Text="000" TextWrapping="Wrap" VerticalAlignment="Top" Width="58" TextAlignment="Center" FontSize="18"/>
+        <Image x:Name="Warrior" HorizontalAlignment="Left" Height="75" Margin="495,17,0,0" VerticalAlignment="Top" Width="75" Source="/BTNKnight.png" Stretch="Fill" StretchDirection="Both"/>
     </Grid>
 </Window>

@@ -7,10 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="BTNKnight.png" />
     <None Remove="icons8-warcraft-iii-100.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="BTNKnight.png" />
     <Resource Include="icons8-warcraft-iii-100.png" />
   </ItemGroup>
 
