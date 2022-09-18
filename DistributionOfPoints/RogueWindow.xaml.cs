@@ -1,50 +1,46 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media.Animation;
-using MongoDB.Driver;
 
 namespace DistributionOfPoints
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Логика взаимодействия для RogueWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class RogueWindow : Window
     {
-        MongoClient m_client;
-        private Warrior warrior = new Warrior();
+        private Rogue rogue = new Rogue();
         private bool initActive;
         private bool scrollWas = false;
 
-        public MainWindow()
+        public RogueWindow()
         {
             InitializeComponent();
 
             initActive = true;
-            ComboBoxUnits.SelectedIndex = 0;
+            ComboBoxUnits.SelectedIndex = 1;
 
-            SkillPointsTextBox.Text = warrior.skillPoints.ToString();
-            StrengthTextBox.Text = warrior.strength[1].ToString();
-            DexterityTextBox.Text = warrior.dexterity[1].ToString();
-            ConstitutionTextBox.Text = warrior.constitution[1].ToString();
-            IntelligenceTextBox.Text = warrior.intelligence[1].ToString();
+            SkillPointsTextBox.Text = rogue.skillPoints.ToString();
+            StrengthTextBox.Text = rogue.strength[1].ToString();
+            DexterityTextBox.Text = rogue.dexterity[1].ToString();
+            ConstitutionTextBox.Text = rogue.constitution[1].ToString();
+            IntelligenceTextBox.Text = rogue.intelligence[1].ToString();
 
-            MaxHPLabel.Content = warrior.maxHP;
-            MaxMPLabel.Content = warrior.maxMP;
-            PAttackLabel.Content = warrior.PAttack;
-            MAttackLabel.Content = warrior.MAttack;
-            PDefLabel.Content = warrior.PDef;
+            MaxHPLabel.Content = rogue.maxHP;
+            MaxMPLabel.Content = rogue.maxMP;
+            PAttackLabel.Content = rogue.PAttack;
+            MAttackLabel.Content = rogue.MAttack;
+            PDefLabel.Content = rogue.PDef;
         }
 
         private void UpdateSpecifications() // updating the display of indicators
         {
-            SkillPointsTextBox.Text = warrior.skillPoints.ToString();
+            SkillPointsTextBox.Text = rogue.skillPoints.ToString();
 
-            MaxHPLabel.Content = warrior.maxHP;
-            MaxMPLabel.Content = warrior.maxMP;
-            PAttackLabel.Content = warrior.PAttack;
-            MAttackLabel.Content = warrior.MAttack;
-            PDefLabel.Content = warrior.PDef;
+            MaxHPLabel.Content = rogue.maxHP;
+            MaxMPLabel.Content = rogue.maxMP;
+            PAttackLabel.Content = rogue.PAttack;
+            MAttackLabel.Content = rogue.MAttack;
+            PDefLabel.Content = rogue.PDef;
         }
 
         private void CheckingLimit(Unit unit, int[] characteristic, Button button) // checking the achievement of the limit of skill points and levels of characteristics
@@ -69,47 +65,47 @@ namespace DistributionOfPoints
 
         private void AddStrength_Button_Click(object sender, RoutedEventArgs e)
         {
-            warrior.ManagementStrength();
-            StrengthTextBox.Text = warrior.strength[1].ToString();
+            rogue.ManagementStrength();
+            StrengthTextBox.Text = rogue.strength[1].ToString();
 
             UpdateSpecifications();
-            CheckingLimit(warrior, warrior.strength, AddStrength_Button);
+            CheckingLimit(rogue, rogue.strength, AddStrength_Button);
         }
 
         private void AddDexterity_Button_Click(object sender, RoutedEventArgs e)
         {
-            warrior.ManagementDexterity();
-            DexterityTextBox.Text = warrior.dexterity[1].ToString();
+            rogue.ManagementDexterity();
+            DexterityTextBox.Text = rogue.dexterity[1].ToString();
 
             UpdateSpecifications();
-            CheckingLimit(warrior, warrior.dexterity, AddDexterity_Button);
+            CheckingLimit(rogue, rogue.dexterity, AddDexterity_Button);
         }
 
         private void AddConstitution_Button_Click(object sender, RoutedEventArgs e)
         {
-            warrior.ManagementConstitution();
-            ConstitutionTextBox.Text = warrior.constitution[1].ToString();
+            rogue.ManagementConstitution();
+            ConstitutionTextBox.Text = rogue.constitution[1].ToString();
 
             UpdateSpecifications();
-            CheckingLimit(warrior, warrior.constitution, AddConstitution_Button);
+            CheckingLimit(rogue, rogue.constitution, AddConstitution_Button);
         }
 
         private void AddIntelligence_Button_Click(object sender, RoutedEventArgs e)
         {
-            warrior.ManagementIntelligence();
-            IntelligenceTextBox.Text = warrior.intelligence[1].ToString();
+            rogue.ManagementIntelligence();
+            IntelligenceTextBox.Text = rogue.intelligence[1].ToString();
 
             UpdateSpecifications();
-            CheckingLimit(warrior, warrior.intelligence, AddIntelligence_Button);
+            CheckingLimit(rogue, rogue.intelligence, AddIntelligence_Button);
         }
 
         private void ResetButton_Click(object sender, RoutedEventArgs e) // resetting characteristics
         {
-            warrior = new Warrior();
-            StrengthTextBox.Text = warrior.strength[1].ToString();
-            DexterityTextBox.Text = warrior.dexterity[1].ToString();
-            ConstitutionTextBox.Text = warrior.constitution[1].ToString();
-            IntelligenceTextBox.Text = warrior.intelligence[1].ToString();
+            rogue = new Rogue();
+            StrengthTextBox.Text = rogue.strength[1].ToString();
+            DexterityTextBox.Text = rogue.dexterity[1].ToString();
+            ConstitutionTextBox.Text = rogue.constitution[1].ToString();
+            IntelligenceTextBox.Text = rogue.intelligence[1].ToString();
 
             UpdateSpecifications();
 
@@ -121,6 +117,7 @@ namespace DistributionOfPoints
 
         private void ComboBoxUnits_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+
             if (!initActive)
             {
                 if (ComboBoxUnits.SelectedIndex == 0)
@@ -145,19 +142,19 @@ namespace DistributionOfPoints
             else initActive = false;
         }
 
-        private void WarriorImg_MouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
+        private void RogueImg_MouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
         {
             if (!scrollWas)
             {
                 if (e.Delta > 0)
                 {
-                    new RogueWindow().Show();
+                    new WizardWindows().Show();
                     Close();
                 }
 
                 else if (e.Delta < 0)
                 {
-                    new WizardWindows().Show();
+                    new MainWindow().Show();
                     Close();
                 }
 

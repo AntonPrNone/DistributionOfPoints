@@ -7,13 +7,24 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="BTNBandit.webp" />
     <None Remove="BTNKnight.png" />
+    <None Remove="BTNRogueWizard.webp" />
+    <None Remove="icon.png" />
     <None Remove="icons8-warcraft-iii-100.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="MongoDB.Bson" Version="2.17.1" />
+    <PackageReference Include="MongoDB.Driver" Version="2.17.1" />
+    <PackageReference Include="MongoDB.Driver.Core" Version="2.17.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="BTNBandit.webp" />
     <Resource Include="BTNKnight.png" />
-    <Resource Include="icons8-warcraft-iii-100.png" />
+    <Resource Include="BTNRogueWizard.webp" />
+    <Resource Include="icon.png" />
   </ItemGroup>
 
 </Project>

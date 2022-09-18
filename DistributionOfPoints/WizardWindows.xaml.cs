@@ -1,50 +1,55 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media.Animation;
-using MongoDB.Driver;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 
 namespace DistributionOfPoints
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Логика взаимодействия для WizardWindows.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class WizardWindows : Window
     {
-        MongoClient m_client;
-        private Warrior warrior = new Warrior();
+        private Wizard wizard = new Wizard();
         private bool initActive;
         private bool scrollWas = false;
 
-        public MainWindow()
+        public WizardWindows()
         {
             InitializeComponent();
 
             initActive = true;
-            ComboBoxUnits.SelectedIndex = 0;
+            ComboBoxUnits.SelectedIndex = 2;
 
-            SkillPointsTextBox.Text = warrior.skillPoints.ToString();
-            StrengthTextBox.Text = warrior.strength[1].ToString();
-            DexterityTextBox.Text = warrior.dexterity[1].ToString();
-            ConstitutionTextBox.Text = warrior.constitution[1].ToString();
-            IntelligenceTextBox.Text = warrior.intelligence[1].ToString();
+            SkillPointsTextBox.Text = wizard.skillPoints.ToString();
+            StrengthTextBox.Text = wizard.strength[1].ToString();
+            DexterityTextBox.Text = wizard.dexterity[1].ToString();
+            ConstitutionTextBox.Text = wizard.constitution[1].ToString();
+            IntelligenceTextBox.Text = wizard.intelligence[1].ToString();
 
-            MaxHPLabel.Content = warrior.maxHP;
-            MaxMPLabel.Content = warrior.maxMP;
-            PAttackLabel.Content = warrior.PAttack;
-            MAttackLabel.Content = warrior.MAttack;
-            PDefLabel.Content = warrior.PDef;
+            MaxHPLabel.Content = wizard.maxHP;
+            MaxMPLabel.Content = wizard.maxMP;
+            PAttackLabel.Content = wizard.PAttack;
+            MAttackLabel.Content = wizard.MAttack;
+            PDefLabel.Content = wizard.PDef;
         }
 
         private void UpdateSpecifications() // updating the display of indicators
         {
-            SkillPointsTextBox.Text = warrior.skillPoints.ToString();
+            SkillPointsTextBox.Text = wizard.skillPoints.ToString();
 
-            MaxHPLabel.Content = warrior.maxHP;
-            MaxMPLabel.Content = warrior.maxMP;
-            PAttackLabel.Content = warrior.PAttack;
-            MAttackLabel.Content = warrior.MAttack;
-            PDefLabel.Content = warrior.PDef;
+            MaxHPLabel.Content = wizard.maxHP;
+            MaxMPLabel.Content = wizard.maxMP;
+            PAttackLabel.Content = wizard.PAttack;
+            MAttackLabel.Content = wizard.MAttack;
+            PDefLabel.Content = wizard.PDef;
         }
 
         private void CheckingLimit(Unit unit, int[] characteristic, Button button) // checking the achievement of the limit of skill points and levels of characteristics
@@ -69,47 +74,47 @@ namespace DistributionOfPoints
 
         private void AddStrength_Button_Click(object sender, RoutedEventArgs e)
         {
-            warrior.ManagementStrength();
-            StrengthTextBox.Text = warrior.strength[1].ToString();
+            wizard.ManagementStrength();
+            StrengthTextBox.Text = wizard.strength[1].ToString();
 
             UpdateSpecifications();
-            CheckingLimit(warrior, warrior.strength, AddStrength_Button);
+            CheckingLimit(wizard, wizard.strength, AddStrength_Button);
         }
 
         private void AddDexterity_Button_Click(object sender, RoutedEventArgs e)
         {
-            warrior.ManagementDexterity();
-            DexterityTextBox.Text = warrior.dexterity[1].ToString();
+            wizard.ManagementDexterity();
+            DexterityTextBox.Text = wizard.dexterity[1].ToString();
 
             UpdateSpecifications();
-            CheckingLimit(warrior, warrior.dexterity, AddDexterity_Button);
+            CheckingLimit(wizard, wizard.dexterity, AddDexterity_Button);
         }
 
         private void AddConstitution_Button_Click(object sender, RoutedEventArgs e)
         {
-            warrior.ManagementConstitution();
-            ConstitutionTextBox.Text = warrior.constitution[1].ToString();
+            wizard.ManagementConstitution();
+            ConstitutionTextBox.Text = wizard.constitution[1].ToString();
 
             UpdateSpecifications();
-            CheckingLimit(warrior, warrior.constitution, AddConstitution_Button);
+            CheckingLimit(wizard, wizard.constitution, AddConstitution_Button);
         }
 
         private void AddIntelligence_Button_Click(object sender, RoutedEventArgs e)
         {
-            warrior.ManagementIntelligence();
-            IntelligenceTextBox.Text = warrior.intelligence[1].ToString();
+            wizard.ManagementIntelligence();
+            IntelligenceTextBox.Text = wizard.intelligence[1].ToString();
 
             UpdateSpecifications();
-            CheckingLimit(warrior, warrior.intelligence, AddIntelligence_Button);
+            CheckingLimit(wizard, wizard.intelligence, AddIntelligence_Button);
         }
 
         private void ResetButton_Click(object sender, RoutedEventArgs e) // resetting characteristics
         {
-            warrior = new Warrior();
-            StrengthTextBox.Text = warrior.strength[1].ToString();
-            DexterityTextBox.Text = warrior.dexterity[1].ToString();
-            ConstitutionTextBox.Text = warrior.constitution[1].ToString();
-            IntelligenceTextBox.Text = warrior.intelligence[1].ToString();
+            wizard = new Wizard();
+            StrengthTextBox.Text = wizard.strength[1].ToString();
+            DexterityTextBox.Text = wizard.dexterity[1].ToString();
+            ConstitutionTextBox.Text = wizard.constitution[1].ToString();
+            IntelligenceTextBox.Text = wizard.intelligence[1].ToString();
 
             UpdateSpecifications();
 
@@ -145,19 +150,19 @@ namespace DistributionOfPoints
             else initActive = false;
         }
 
-        private void WarriorImg_MouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
+        private void WizardImg_MouseWheel(object sender, MouseWheelEventArgs e)
         {
             if (!scrollWas)
             {
                 if (e.Delta > 0)
                 {
-                    new RogueWindow().Show();
+                    new MainWindow().Show();
                     Close();
                 }
 
                 else if (e.Delta < 0)
                 {
-                    new WizardWindows().Show();
+                    new RogueWindow().Show();
                     Close();
                 }
 
