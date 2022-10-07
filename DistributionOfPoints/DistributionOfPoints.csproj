@@ -21,6 +21,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\DistributionOfPoints_Console\DistributionOfPoints_Console\DistributionOfPoints_Console.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="BTNBandit.webp" />
     <Resource Include="BTNKnight.png" />
     <Resource Include="BTNRogueWizard.webp" />

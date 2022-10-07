@@ -1,11 +1,11 @@
-﻿<Window x:Class="DistributionOfPoints.MainWindow"
+﻿<Window x:Class="DistributionOfPoints.WarriorWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DistributionOfPoints"
         mc:Ignorable="d"
-        Title="Distribution of skill points. Warrior. WarCraft |||" Height="450" Width="800" Visibility="Visible" WindowStartupLocation="CenterScreen" WindowStyle="SingleBorderWindow" BorderThickness="0,0,0,0" Icon="/icon.png" SizeToContent="Manual">
+        Title="Distribution of skill points. Warrior. WarCraft |||" Height="450" Width="800" Visibility="Visible" WindowStartupLocation="CenterScreen" WindowStyle="SingleBorderWindow" BorderThickness="0,0,0,0" Icon="/icon.png" SizeToContent="Manual" Closed="Window_Closed">
     <Window.Background>
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
             <GradientStop Color="Black"/>
@@ -15,7 +15,7 @@
 
     <Grid>
         <Label Content="Strength" HorizontalAlignment="Left" Margin="45,99,0,0" VerticalAlignment="Top" Foreground="White" FontWeight="Bold" FontSize="18"/>
-        <TextBlock x:Name="StrengthTextBox" HorizontalAlignment="Left" Margin="135,107,0,0" Text="000" TextWrapping="Wrap" VerticalAlignment="Top" Background="White" RenderTransformOrigin="0.5,0.5" Height="20" Width="40" Visibility="Visible" TextAlignment="Center" AutomationProperties.Name="StrengthTextBox">
+        <TextBlock x:Name="StrengthTextBox" HorizontalAlignment="Left" Margin="180,107,0,0" Text="000" TextWrapping="Wrap" VerticalAlignment="Top" Background="White" RenderTransformOrigin="0.5,0.5" Height="20" Width="40" Visibility="Visible" TextAlignment="Center" AutomationProperties.Name="StrengthTextBox">
             <TextBlock.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -25,9 +25,9 @@
                 </TransformGroup>
             </TextBlock.RenderTransform>
         </TextBlock>
-        <Button x:Name="AddStrength_Button" Content="+" HorizontalAlignment="Left" Margin="185,98,0,0" VerticalAlignment="Top" Background="#FF079500" FontSize="20" Height="36" Foreground="White" BorderBrush="#FF0D4400" Width="18" Click="AddStrength_Button_Click" Cursor="Hand"/>
+        <Button x:Name="AddStrength_Button" Content="+" HorizontalAlignment="Left" Margin="230,98,0,0" VerticalAlignment="Top" Background="#FF079500" FontSize="20" Height="36" Foreground="White" BorderBrush="#FF0D4400" Width="18" Click="AddStrength_Button_Click" Cursor="Hand"/>
         <Label Content="Dexterity" HorizontalAlignment="Left" Margin="45,169,0,0" VerticalAlignment="Top" Foreground="White" FontWeight="Bold" FontSize="18"/>
-        <TextBlock x:Name="DexterityTextBox" HorizontalAlignment="Left" Margin="135,176,0,0" Text="000" TextWrapping="Wrap" VerticalAlignment="Top" Background="White" RenderTransformOrigin="0.5,0.5" Height="20" Width="40" Visibility="Visible" TextAlignment="Center" AutomationProperties.Name="DexterityTextBox">
+        <TextBlock x:Name="DexterityTextBox" HorizontalAlignment="Left" Margin="180,176,0,0" Text="000" TextWrapping="Wrap" VerticalAlignment="Top" Background="White" RenderTransformOrigin="0.5,0.5" Height="20" Width="40" Visibility="Visible" TextAlignment="Center" AutomationProperties.Name="DexterityTextBox">
             <TextBlock.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -37,9 +37,9 @@
                 </TransformGroup>
             </TextBlock.RenderTransform>
         </TextBlock>
-        <Button x:Name="AddDexterity_Button" Content="+" HorizontalAlignment="Left" Margin="185,168,0,0" VerticalAlignment="Top" Background="#FF079500" FontSize="20" Height="36" Foreground="White" BorderBrush="#FF0D4400" Width="18" Click="AddDexterity_Button_Click" Cursor="Hand"/>
+        <Button x:Name="AddDexterity_Button" Content="+" HorizontalAlignment="Left" Margin="230,168,0,0" VerticalAlignment="Top" Background="#FF079500" FontSize="20" Height="36" Foreground="White" BorderBrush="#FF0D4400" Width="18" Click="AddDexterity_Button_Click" Cursor="Hand"/>
         <Label Content="Сonstitution" HorizontalAlignment="Left" Margin="45,239,0,0" VerticalAlignment="Top" Foreground="White" FontWeight="Bold" FontSize="14"/>
-        <TextBlock x:Name="ConstitutionTextBox" HorizontalAlignment="Left" Margin="135,246,0,0" Text="000" TextWrapping="Wrap" VerticalAlignment="Top" Background="White" RenderTransformOrigin="0.5,0.5" Height="20" Width="40" Visibility="Visible" TextAlignment="Center" AutomationProperties.Name="ConstitutionTextBox">
+        <TextBlock x:Name="ConstitutionTextBox" HorizontalAlignment="Left" Margin="180,246,0,0" Text="000" TextWrapping="Wrap" VerticalAlignment="Top" Background="White" RenderTransformOrigin="0.5,0.5" Height="20" Width="40" Visibility="Visible" TextAlignment="Center" AutomationProperties.Name="ConstitutionTextBox">
             <TextBlock.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -49,9 +49,9 @@
                 </TransformGroup>
             </TextBlock.RenderTransform>
         </TextBlock>
-        <Button x:Name="AddConstitution_Button" Content="+" HorizontalAlignment="Left" Margin="185,238,0,0" VerticalAlignment="Top" Background="#FF079500" FontSize="20" Height="36" Foreground="White" BorderBrush="#FF0D4400" Width="18" Click="AddConstitution_Button_Click" Cursor="Hand"/>
+        <Button x:Name="AddConstitution_Button" Content="+" HorizontalAlignment="Left" Margin="230,238,0,0" VerticalAlignment="Top" Background="#FF079500" FontSize="20" Height="36" Foreground="White" BorderBrush="#FF0D4400" Width="18" Click="AddConstitution_Button_Click" Cursor="Hand"/>
         <Label Content="intelligence" HorizontalAlignment="Left" Margin="45,309,0,0" VerticalAlignment="Top" Foreground="White" FontWeight="Bold" FontSize="14"/>
-        <TextBlock x:Name="IntelligenceTextBox" HorizontalAlignment="Left" Margin="135,316,0,0" Text="000" TextWrapping="Wrap" VerticalAlignment="Top" Background="White" RenderTransformOrigin="0.5,0.5" Height="20" Width="40" Visibility="Visible" TextAlignment="Center" AutomationProperties.Name="IntelligenceTextBox">
+        <TextBlock x:Name="IntelligenceTextBox" HorizontalAlignment="Left" Margin="180,316,0,0" Text="000" TextWrapping="Wrap" VerticalAlignment="Top" Background="White" RenderTransformOrigin="0.5,0.5" Height="20" Width="40" Visibility="Visible" TextAlignment="Center" AutomationProperties.Name="IntelligenceTextBox">
             <TextBlock.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -61,7 +61,7 @@
                 </TransformGroup>
             </TextBlock.RenderTransform>
         </TextBlock>
-        <Button x:Name="AddIntelligence_Button" Content="+" HorizontalAlignment="Left" Margin="185,308,0,0" VerticalAlignment="Top" Background="#FF079500" FontSize="20" Height="36" Foreground="White" BorderBrush="#FF0D4400" Width="18" Click="AddIntelligence_Button_Click" Cursor="Hand"/>
+        <Button x:Name="AddIntelligence_Button" Content="+" HorizontalAlignment="Left" Margin="230,308,0,0" VerticalAlignment="Top" Background="#FF079500" FontSize="20" Height="36" Foreground="White" BorderBrush="#FF0D4400" Width="18" Click="AddIntelligence_Button_Click" Cursor="Hand"/>
         <Grid HorizontalAlignment="Center" Height="39" Margin="0,373,0,0" VerticalAlignment="Top" Width="800">
             <Label Content="MaxHP:" HorizontalAlignment="Left" Margin="50,0,0,0" VerticalAlignment="Center" Foreground="#FF5A85F7" FontSize="14"/>
             <Label x:Name="MaxHPLabel" Content="000" HorizontalAlignment="Left" Margin="122,0,0,0" VerticalAlignment="Center" Foreground="White" AutomationProperties.Name="MaxHPLabel"/>
@@ -83,5 +83,9 @@
             <ComboBoxItem Content="Rogue"/>
             <ComboBoxItem Content="Wizard"/>
         </ComboBox>
+        <Button x:Name="ReduceStrength_Button" Content="-" HorizontalAlignment="Left" Margin="151,99,0,0" VerticalAlignment="Top" Background="#FF950A00" FontSize="20" Height="36" Foreground="White" BorderBrush="#FF610600" Width="18" Click="ReduceStrength_Button_Click" Cursor="Hand"/>
+        <Button x:Name="ReduceDexterity_Button" Content="-" HorizontalAlignment="Left" Margin="151,169,0,0" VerticalAlignment="Top" Background="#FF950A00" FontSize="20" Height="36" Foreground="White" BorderBrush="#FF610600" Width="18" Click="ReduceDexterity_Button_Click" Cursor="Hand"/>
+        <Button x:Name="ReduceConstitution_Button" Content="-" HorizontalAlignment="Left" Margin="151,239,0,0" VerticalAlignment="Top" Background="#FF950A00" FontSize="20" Height="36" Foreground="White" BorderBrush="#FF610600" Width="18" Click="ReduceConstitution_Button_Click" Cursor="Hand"/>
+        <Button x:Name="ReduceIntelligence_Button" Content="-" HorizontalAlignment="Left" Margin="151,309,0,0" VerticalAlignment="Top" Background="#FF950A00" FontSize="20" Height="36" Foreground="White" BorderBrush="#FF610600" Width="18" Click="ReduceIntelligence_Button_Click" Cursor="Hand"/>
     </Grid>
 </Window>

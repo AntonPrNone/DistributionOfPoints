@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using DistributionOfPoints_Console;
 
 namespace DistributionOfPoints
 {
@@ -17,7 +10,7 @@ namespace DistributionOfPoints
     /// </summary>
     public partial class WizardWindows : Window
     {
-        private Wizard wizard = new Wizard();
+        private Unit wizard = MongoExamples.Find("Wizard");
         private bool initActive;
         private bool scrollWas = false;
 
@@ -74,7 +67,7 @@ namespace DistributionOfPoints
 
         private void AddStrength_Button_Click(object sender, RoutedEventArgs e)
         {
-            wizard.ManagementStrength();
+            wizard.ManagementStrengthWizard('+');
             StrengthTextBox.Text = wizard.strength[1].ToString();
 
             UpdateSpecifications();
@@ -83,7 +76,7 @@ namespace DistributionOfPoints
 
         private void AddDexterity_Button_Click(object sender, RoutedEventArgs e)
         {
-            wizard.ManagementDexterity();
+            wizard.ManagementDexterityWizard('+');
             DexterityTextBox.Text = wizard.dexterity[1].ToString();
 
             UpdateSpecifications();
@@ -92,7 +85,7 @@ namespace DistributionOfPoints
 
         private void AddConstitution_Button_Click(object sender, RoutedEventArgs e)
         {
-            wizard.ManagementConstitution();
+            wizard.ManagementConstitutionWizard('+');
             ConstitutionTextBox.Text = wizard.constitution[1].ToString();
 
             UpdateSpecifications();
@@ -101,7 +94,7 @@ namespace DistributionOfPoints
 
         private void AddIntelligence_Button_Click(object sender, RoutedEventArgs e)
         {
-            wizard.ManagementIntelligence();
+            wizard.ManagementIntelligenceWizard('+');
             IntelligenceTextBox.Text = wizard.intelligence[1].ToString();
 
             UpdateSpecifications();
@@ -110,7 +103,9 @@ namespace DistributionOfPoints
 
         private void ResetButton_Click(object sender, RoutedEventArgs e) // resetting characteristics
         {
-            wizard = new Wizard();
+            MongoExamples.ResetValues(wizard.Name);
+            wizard = MongoExamples.Find("Wizard");
+
             StrengthTextBox.Text = wizard.strength[1].ToString();
             DexterityTextBox.Text = wizard.dexterity[1].ToString();
             ConstitutionTextBox.Text = wizard.constitution[1].ToString();
@@ -130,7 +125,7 @@ namespace DistributionOfPoints
             {
                 if (ComboBoxUnits.SelectedIndex == 0)
                 {
-                    new MainWindow().Show();
+                    new WarriorWindow().Show();
                     Close();
                 }
 
@@ -156,7 +151,7 @@ namespace DistributionOfPoints
             {
                 if (e.Delta > 0)
                 {
-                    new MainWindow().Show();
+                    new WarriorWindow().Show();
                     Close();
                 }
 
@@ -168,6 +163,11 @@ namespace DistributionOfPoints
 
                 scrollWas = true;
             }
+        }
+
+        private void Window_Closed(object sender, System.EventArgs e)
+        {
+            MongoExamples.ReplaceByName(wizard.Name, wizard);
         }
     }
 }

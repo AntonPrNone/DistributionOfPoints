@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using DistributionOfPoints_Console;
 
 namespace DistributionOfPoints
 {
@@ -8,7 +9,7 @@ namespace DistributionOfPoints
     /// </summary>
     public partial class RogueWindow : Window
     {
-        private Rogue rogue = new Rogue();
+        private Unit rogue = MongoExamples.Find("Rogue");
         private bool initActive;
         private bool scrollWas = false;
 
@@ -65,7 +66,7 @@ namespace DistributionOfPoints
 
         private void AddStrength_Button_Click(object sender, RoutedEventArgs e)
         {
-            rogue.ManagementStrength();
+            rogue.ManagementStrengthRogue('+');
             StrengthTextBox.Text = rogue.strength[1].ToString();
 
             UpdateSpecifications();
@@ -74,7 +75,7 @@ namespace DistributionOfPoints
 
         private void AddDexterity_Button_Click(object sender, RoutedEventArgs e)
         {
-            rogue.ManagementDexterity();
+            rogue.ManagementDexterityRogue('+');
             DexterityTextBox.Text = rogue.dexterity[1].ToString();
 
             UpdateSpecifications();
@@ -83,7 +84,7 @@ namespace DistributionOfPoints
 
         private void AddConstitution_Button_Click(object sender, RoutedEventArgs e)
         {
-            rogue.ManagementConstitution();
+            rogue.ManagementConstitutionRogue('+');
             ConstitutionTextBox.Text = rogue.constitution[1].ToString();
 
             UpdateSpecifications();
@@ -92,7 +93,7 @@ namespace DistributionOfPoints
 
         private void AddIntelligence_Button_Click(object sender, RoutedEventArgs e)
         {
-            rogue.ManagementIntelligence();
+            rogue.ManagementIntelligenceRogue('+');
             IntelligenceTextBox.Text = rogue.intelligence[1].ToString();
 
             UpdateSpecifications();
@@ -101,7 +102,9 @@ namespace DistributionOfPoints
 
         private void ResetButton_Click(object sender, RoutedEventArgs e) // resetting characteristics
         {
-            rogue = new Rogue();
+            MongoExamples.ResetValues(rogue.Name);
+            rogue = MongoExamples.Find("Rogue");
+
             StrengthTextBox.Text = rogue.strength[1].ToString();
             DexterityTextBox.Text = rogue.dexterity[1].ToString();
             ConstitutionTextBox.Text = rogue.constitution[1].ToString();
@@ -122,7 +125,7 @@ namespace DistributionOfPoints
             {
                 if (ComboBoxUnits.SelectedIndex == 0)
                 {
-                    new MainWindow().Show();
+                    new WarriorWindow().Show();
                     Close();
                 }
 
@@ -154,12 +157,17 @@ namespace DistributionOfPoints
 
                 else if (e.Delta < 0)
                 {
-                    new MainWindow().Show();
+                    new WarriorWindow().Show();
                     Close();
                 }
 
                 scrollWas = true;
             }
+        }
+
+        private void Window_Closed(object sender, System.EventArgs e)
+        {
+            MongoExamples.ReplaceByName(rogue.Name, rogue);
         }
     }
 }

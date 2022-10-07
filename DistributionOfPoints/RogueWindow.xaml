@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DistributionOfPoints"
         mc:Ignorable="d"
-        Title="Distribution of skill points. Rogue. WarCraft |||" Height="450" Width="800" Visibility="Visible" WindowStartupLocation="CenterScreen" WindowStyle="SingleBorderWindow" BorderThickness="0,0,0,0" Icon="/Icon.png" SizeToContent="Manual">
+        Title="Distribution of skill points. Rogue. WarCraft |||" Height="450" Width="800" Visibility="Visible" WindowStartupLocation="CenterScreen" WindowStyle="SingleBorderWindow" BorderThickness="0,0,0,0" Icon="/Icon.png" SizeToContent="Manual" Closed="Window_Closed">
     <Window.Background>
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
             <GradientStop Color="Black"/>
