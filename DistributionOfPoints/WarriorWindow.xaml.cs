@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using DistributionOfPoints_Console;
 
 namespace DistributionOfPoints
@@ -10,39 +12,42 @@ namespace DistributionOfPoints
     /// </summary>
     public partial class WarriorWindow : Window
     {
+        Unit unit;
         Unit warrior = MongoExamples.Find("Warrior");
-        private bool initActive;
-        private bool scrollWas = false;
+        Unit rogue = MongoExamples.Find("Rogue");
+        Unit wizard = MongoExamples.Find("Wizard");
+
+        bool mouseScrolled = false;
 
         public WarriorWindow()
         {
             InitializeComponent();
 
-            initActive = true;
+            unit = warrior;
             ComboBoxUnits.SelectedIndex = 0;
 
-            SkillPointsTextBox.Text = warrior.skillPoints.ToString();
-            StrengthTextBox.Text = warrior.strength[1].ToString();
-            DexterityTextBox.Text = warrior.dexterity[1].ToString();
-            ConstitutionTextBox.Text = warrior.constitution[1].ToString();
-            IntelligenceTextBox.Text = warrior.intelligence[1].ToString();
+            SkillPointsTextBox.Text = unit.skillPoints.ToString();
+            StrengthTextBox.Text = unit.strength[1].ToString();
+            DexterityTextBox.Text = unit.dexterity[1].ToString();
+            ConstitutionTextBox.Text = unit.constitution[1].ToString();
+            IntelligenceTextBox.Text = unit.intelligence[1].ToString();
 
-            MaxHPLabel.Content = warrior.maxHP;
-            MaxMPLabel.Content = warrior.maxMP;
-            PAttackLabel.Content = warrior.PAttack;
-            MAttackLabel.Content = warrior.MAttack;
-            PDefLabel.Content = warrior.PDef;
+            MaxHPLabel.Content = unit.maxHP;
+            MaxMPLabel.Content = unit.maxMP;
+            PAttackLabel.Content = unit.PAttack;
+            MAttackLabel.Content = unit.MAttack;
+            PDefLabel.Content = unit.PDef;
         }
 
         private void UpdateSpecifications() // updating the display of indicators
         {
-            SkillPointsTextBox.Text = warrior.skillPoints.ToString();
+            SkillPointsTextBox.Text = unit.skillPoints.ToString();
 
-            MaxHPLabel.Content = warrior.maxHP;
-            MaxMPLabel.Content = warrior.maxMP;
-            PAttackLabel.Content = warrior.PAttack;
-            MAttackLabel.Content = warrior.MAttack;
-            PDefLabel.Content = warrior.PDef;
+            MaxHPLabel.Content = unit.maxHP;
+            MaxMPLabel.Content = unit.maxMP;
+            PAttackLabel.Content = unit.PAttack;
+            MAttackLabel.Content = unit.MAttack;
+            PDefLabel.Content = unit.PDef;
         }
 
         private void CheckingLimit(Unit unit, int[] characteristic, Button button) // checking the achievement of the limit of skill points and levels of characteristics
@@ -69,87 +74,87 @@ namespace DistributionOfPoints
 
         private void AddStrength_Button_Click(object sender, RoutedEventArgs e)
         {
-            warrior.ManagementStrengthWarrior('+');
-            StrengthTextBox.Text = warrior.strength[1].ToString();
+            unit.ManagementStrengthWarrior('+');
+            StrengthTextBox.Text = unit.strength[1].ToString();
 
             UpdateSpecifications();
-            CheckingLimit(warrior, warrior.strength, AddStrength_Button);
+            CheckingLimit(unit, unit.strength, AddStrength_Button);
         }
 
         private void AddDexterity_Button_Click(object sender, RoutedEventArgs e)
         {
-            warrior.ManagementDexterityWarrior('+');
-            DexterityTextBox.Text = warrior.dexterity[1].ToString();
+            unit.ManagementDexterityWarrior('+');
+            DexterityTextBox.Text = unit.dexterity[1].ToString();
 
             UpdateSpecifications();
-            CheckingLimit(warrior, warrior.dexterity, AddDexterity_Button);
+            CheckingLimit(unit, unit.dexterity, AddDexterity_Button);
         }
 
         private void AddConstitution_Button_Click(object sender, RoutedEventArgs e)
         {
-            warrior.ManagementConstitutionWarrior('+');
-            ConstitutionTextBox.Text = warrior.constitution[1].ToString();
+            unit.ManagementConstitutionWarrior('+');
+            ConstitutionTextBox.Text = unit.constitution[1].ToString();
 
             UpdateSpecifications();
-            CheckingLimit(warrior, warrior.constitution, AddConstitution_Button);
+            CheckingLimit(unit, unit.constitution, AddConstitution_Button);
         }
 
         private void AddIntelligence_Button_Click(object sender, RoutedEventArgs e)
         {
-            warrior.ManagementIntelligenceWarrior('+');
-            IntelligenceTextBox.Text = warrior.intelligence[1].ToString();
+            unit.ManagementIntelligenceWarrior('+');
+            IntelligenceTextBox.Text = unit.intelligence[1].ToString();
 
             UpdateSpecifications();
-            CheckingLimit(warrior, warrior.intelligence, AddIntelligence_Button);
+            CheckingLimit(unit, unit.intelligence, AddIntelligence_Button);
         }
 
         private void ReduceStrength_Button_Click(object sender, RoutedEventArgs e)
         {
-            warrior.ManagementStrengthWarrior('-');
-            StrengthTextBox.Text = warrior.strength[1].ToString();
+            unit.ManagementStrengthWarrior('-');
+            StrengthTextBox.Text = unit.strength[1].ToString();
 
             UpdateSpecifications();
-            CheckingLimit(warrior, warrior.strength, AddStrength_Button);
+            CheckingLimit(unit, unit.strength, AddStrength_Button);
         }
 
         private void ReduceDexterity_Button_Click(object sender, RoutedEventArgs e)
         {
-            warrior.ManagementDexterityWarrior('-');
-            DexterityTextBox.Text = warrior.dexterity[1].ToString();
+            unit.ManagementDexterityWarrior('-');
+            DexterityTextBox.Text = unit.dexterity[1].ToString();
 
             UpdateSpecifications();
-            CheckingLimit(warrior, warrior.dexterity, AddDexterity_Button);
+            CheckingLimit(unit, unit.dexterity, AddDexterity_Button);
         }
 
         private void ReduceConstitution_Button_Click(object sender, RoutedEventArgs e)
         {
-            warrior.ManagementConstitutionWarrior('-');
-            ConstitutionTextBox.Text = warrior.constitution[1].ToString();
+            unit.ManagementConstitutionWarrior('-');
+            ConstitutionTextBox.Text = unit.constitution[1].ToString();
 
             UpdateSpecifications();
-            CheckingLimit(warrior, warrior.constitution, AddConstitution_Button);
+            CheckingLimit(unit, unit.constitution, AddConstitution_Button);
         }
 
         private void ReduceIntelligence_Button_Click(object sender, RoutedEventArgs e)
         {
-            warrior.ManagementIntelligenceWarrior('-');
-            IntelligenceTextBox.Text = warrior.intelligence[1].ToString();
+            unit.ManagementIntelligenceWarrior('-');
+            IntelligenceTextBox.Text = unit.intelligence[1].ToString();
 
             UpdateSpecifications();
-            CheckingLimit(warrior, warrior.intelligence, AddIntelligence_Button);
+            CheckingLimit(unit, unit.intelligence, AddIntelligence_Button);
         }
 
         // ------------------------------------------------------------------------------------------------------
 
         private void ResetButton_Click(object sender, RoutedEventArgs e) // resetting characteristics
         {
-            MongoExamples.ResetValues(warrior.Name);
-            warrior = MongoExamples.Find("Warrior");
+            MongoExamples.ResetValues(unit.Name);
+            unit = MongoExamples.Find("Warrior");
 
-            StrengthTextBox.Text = warrior.strength[1].ToString();
-            DexterityTextBox.Text = warrior.dexterity[1].ToString();
-            ConstitutionTextBox.Text = warrior.constitution[1].ToString();
-            IntelligenceTextBox.Text = warrior.intelligence[1].ToString();
+            StrengthTextBox.Text = unit.strength[1].ToString();
+            DexterityTextBox.Text = unit.dexterity[1].ToString();
+            ConstitutionTextBox.Text = unit.constitution[1].ToString();
+            IntelligenceTextBox.Text = unit.intelligence[1].ToString();
 
             UpdateSpecifications();
 
@@ -161,53 +166,120 @@ namespace DistributionOfPoints
 
         private void ComboBoxUnits_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (!initActive)
+            if (!mouseScrolled)
             {
-                if (ComboBoxUnits.SelectedIndex == 0)
+                if (ComboBoxUnits.SelectedIndex == 0 && unit.Name != warrior.Name)
                 {
-                    new WarriorWindow().Show();
-                    Close();
+                    SwitchingUnits(warrior);
                 }
 
-                else if (ComboBoxUnits.SelectedIndex == 1)
+                if (ComboBoxUnits.SelectedIndex == 1 && unit.Name != rogue.Name)
                 {
-                    new RogueWindow().Show();
-                    Close();
+                    SwitchingUnits(rogue);
                 }
 
-                else if (ComboBoxUnits.SelectedIndex == 2)
+                else if (ComboBoxUnits.SelectedIndex == 2 && unit.Name != wizard.Name)
                 {
-                    new WizardWindows().Show();
-                    Close();
-                }
+                    SwitchingUnits(wizard);
+                } 
             }
-
-            else initActive = false;
         }
 
         private void WarriorImg_MouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
         {
-            if (!scrollWas)
+            Unit[] units = { warrior, rogue, wizard };
+            if (e.Delta > 0)
             {
-                if (e.Delta > 0)
+                if (Array.IndexOf(units, unit) == units.Length - 1)
                 {
-                    new RogueWindow().Show();
-                    Close();
+                    mouseScrolled = true;
+                    ComboBoxUnits.SelectedIndex = 0;
+                    mouseScrolled = false;
+
+                    SwitchingUnits(units[0]);
                 }
 
-                else if (e.Delta < 0)
+                else
                 {
-                    new WizardWindows().Show();
-                    Close();
+                    mouseScrolled = true;
+                    ComboBoxUnits.SelectedIndex = Array.IndexOf(units, unit) + 1;
+                    mouseScrolled = false;
+
+                    SwitchingUnits(units[Array.IndexOf(units, unit) + 1]);
+                }
+            }
+
+            else if (e.Delta < 0)
+            {
+                if (Array.IndexOf(units, unit) == 0)
+                {
+                    mouseScrolled = true;
+                    ComboBoxUnits.SelectedIndex = units.Length - 1;
+                    mouseScrolled = false;
+
+                    SwitchingUnits(units[units.Length - 1]);
                 }
 
-                scrollWas = true;
+                else
+                {
+                    mouseScrolled = true;
+                    ComboBoxUnits.SelectedIndex = Array.IndexOf(units, unit) - 1;
+                    mouseScrolled = false;
+
+                    SwitchingUnits(units[Array.IndexOf(units, unit) - 1]);
+                }
             }
         }
 
         private void Window_Closed(object sender, EventArgs e)
         {
-            MongoExamples.ReplaceByName(warrior.Name, warrior);
-        }  
+            MongoExamples.ReplaceByName(unit.Name, unit);
+        }
+
+        private void SwitchingUnits(Unit unit)
+        {
+            MongoExamples.ReplaceByName(this.unit.Name, this.unit);
+            this.unit = unit;
+
+            if (unit.Name == "Warrior")
+            {
+                WarriorImg.Source = new BitmapImage(new Uri("/BTNKnight.png", UriKind.Relative));
+
+                GradientStopCollection gsc = new GradientStopCollection();
+                gsc.Add(new GradientStop()
+                {
+                    Color = Colors.Red,
+                    Offset = 0.0
+                });
+
+                gsc.Add(new GradientStop()
+                {
+                    Color = Colors.Black,
+                    Offset = 0.5
+                });
+
+                ProstoWindow.Background = new LinearGradientBrush(gsc, 0)
+                {
+                    StartPoint = new Point(0.5, 0),
+                    EndPoint = new Point(0.5, 1)
+                };
+            }
+
+            if (unit.Name == "Rogue")
+            {
+                WarriorImg.Source = new BitmapImage(new Uri("/BTNBandit.webp", UriKind.Relative));
+            }
+
+            if (unit.Name == "Wizard")
+            {
+                WarriorImg.Source = new BitmapImage(new Uri("/BTNRogueWizard.webp", UriKind.Relative));
+            }
+
+            UpdateSpecifications();
+            StrengthTextBox.Text = unit.strength[1].ToString();
+            DexterityTextBox.Text = unit.dexterity[1].ToString();
+            ConstitutionTextBox.Text = unit.constitution[1].ToString();
+            IntelligenceTextBox.Text = unit.intelligence[1].ToString();
+        }
     }
 }

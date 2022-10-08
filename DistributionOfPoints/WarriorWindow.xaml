@@ -1,4 +1,4 @@
-﻿<Window x:Class="DistributionOfPoints.WarriorWindow"
+﻿<Window x:Name="ProstoWindow" x:Class="DistributionOfPoints.WarriorWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:DistributionOfPoints"
         mc:Ignorable="d"
         Title="Distribution of skill points. Warrior. WarCraft |||" Height="450" Width="800" Visibility="Visible" WindowStartupLocation="CenterScreen" WindowStyle="SingleBorderWindow" BorderThickness="0,0,0,0" Icon="/icon.png" SizeToContent="Manual" Closed="Window_Closed">
+    <Window.Resources>
+        <Color x:Key="GradientStopColorWarrior">#FF420000</Color>
+    </Window.Resources>
     <Window.Background>
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
             <GradientStop Color="Black"/>

@@ -10,14 +10,11 @@ namespace DistributionOfPoints
     public partial class RogueWindow : Window
     {
         private Unit rogue = MongoExamples.Find("Rogue");
-        private bool initActive;
-        private bool scrollWas = false;
 
         public RogueWindow()
         {
             InitializeComponent();
 
-            initActive = true;
             ComboBoxUnits.SelectedIndex = 1;
 
             SkillPointsTextBox.Text = rogue.skillPoints.ToString();
@@ -120,48 +117,33 @@ namespace DistributionOfPoints
 
         private void ComboBoxUnits_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
-            if (!initActive)
+            if (ComboBoxUnits.SelectedIndex == 0)
             {
-                if (ComboBoxUnits.SelectedIndex == 0)
-                {
-                    new WarriorWindow().Show();
-                    Close();
-                }
-
-                else if (ComboBoxUnits.SelectedIndex == 1)
-                {
-                    new RogueWindow().Show();
-                    Close();
-                }
-
-                else if (ComboBoxUnits.SelectedIndex == 2)
-                {
-                    new WizardWindows().Show();
-                    Close();
-                }
+                new WarriorWindow().Show();
+                Close();
             }
 
-            else initActive = false;
+            else if (ComboBoxUnits.SelectedIndex == 2)
+            {
+                new WizardWindows().Show();
+                Close();
+            }
         }
 
         private void RogueImg_MouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
         {
-            if (!scrollWas)
+            RogueImg.IsEnabled = false;
+
+            if (e.Delta > 0)
             {
-                if (e.Delta > 0)
-                {
-                    new WizardWindows().Show();
-                    Close();
-                }
+                new WizardWindows().Show();
+                Close();
+            }
 
-                else if (e.Delta < 0)
-                {
-                    new WarriorWindow().Show();
-                    Close();
-                }
-
-                scrollWas = true;
+            else if (e.Delta < 0)
+            {
+                new WarriorWindow().Show();
+                Close();
             }
         }
 
