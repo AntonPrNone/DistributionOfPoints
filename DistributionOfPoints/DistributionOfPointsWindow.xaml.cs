@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using DistributionOfPoints_Console;
 
@@ -12,13 +11,13 @@ namespace DistributionOfPoints
     /// </summary>
     public partial class DistributionOfPointsWindow : Window
     {
-        Unit unit;
-        Unit[] units;
-        Unit warrior = MongoExamples.Find("Warrior");
-        Unit rogue = MongoExamples.Find("Rogue");
-        Unit wizard = MongoExamples.Find("Wizard");
+        private Unit unit;
+        private Unit[] units;
+        private Unit warrior = MongoExamples.Find("Warrior");
+        private Unit rogue = MongoExamples.Find("Rogue");
+        private Unit wizard = MongoExamples.Find("Wizard");
 
-        bool mouseScrolled = false;
+        private bool mouseScrolled = false;
 
         public DistributionOfPointsWindow()
         {
@@ -41,7 +40,7 @@ namespace DistributionOfPoints
             PDefLabel.Content = unit.PDef;
         }
 
-        private void UpdateSpecifications() // updating the display of indicators
+        private void UpdateData() // updating the display of indicators
         {
             SkillPointsTextBox.Text = unit.skillPoints.ToString();
 
@@ -50,6 +49,11 @@ namespace DistributionOfPoints
             PAttackLabel.Content = unit.PAttack;
             MAttackLabel.Content = unit.MAttack;
             PDefLabel.Content = unit.PDef;
+
+            StrengthTextBox.Text = unit.strength[1].ToString();
+            DexterityTextBox.Text = unit.dexterity[1].ToString();
+            ConstitutionTextBox.Text = unit.constitution[1].ToString();
+            IntelligenceTextBox.Text = unit.intelligence[1].ToString();
         }
 
         private void CheckingLimit(Unit unit, int[] characteristic, Button button) // checking the achievement of the limit of skill points and levels of characteristics
@@ -77,73 +81,57 @@ namespace DistributionOfPoints
         private void AddStrength_Button_Click(object sender, RoutedEventArgs e)
         {
             unit.ManagementStrengthWarrior('+');
-            StrengthTextBox.Text = unit.strength[1].ToString();
-
-            UpdateSpecifications();
+            UpdateData();
             CheckingLimit(unit, unit.strength, AddStrength_Button);
         }
 
         private void AddDexterity_Button_Click(object sender, RoutedEventArgs e)
         {
             unit.ManagementDexterityWarrior('+');
-            DexterityTextBox.Text = unit.dexterity[1].ToString();
-
-            UpdateSpecifications();
+            UpdateData();
             CheckingLimit(unit, unit.dexterity, AddDexterity_Button);
         }
 
         private void AddConstitution_Button_Click(object sender, RoutedEventArgs e)
         {
             unit.ManagementConstitutionWarrior('+');
-            ConstitutionTextBox.Text = unit.constitution[1].ToString();
-
-            UpdateSpecifications();
+            UpdateData();
             CheckingLimit(unit, unit.constitution, AddConstitution_Button);
         }
 
         private void AddIntelligence_Button_Click(object sender, RoutedEventArgs e)
         {
             unit.ManagementIntelligenceWarrior('+');
-            IntelligenceTextBox.Text = unit.intelligence[1].ToString();
-
-            UpdateSpecifications();
+            UpdateData();
             CheckingLimit(unit, unit.intelligence, AddIntelligence_Button);
         }
 
         private void ReduceStrength_Button_Click(object sender, RoutedEventArgs e)
         {
             unit.ManagementStrengthWarrior('-');
-            StrengthTextBox.Text = unit.strength[1].ToString();
-
-            UpdateSpecifications();
-            CheckingLimit(unit, unit.strength, AddStrength_Button);
+            UpdateData();
+            CheckingLimit(unit, unit.strength, ReduceStrength_Button);
         }
 
         private void ReduceDexterity_Button_Click(object sender, RoutedEventArgs e)
         {
             unit.ManagementDexterityWarrior('-');
-            DexterityTextBox.Text = unit.dexterity[1].ToString();
-
-            UpdateSpecifications();
-            CheckingLimit(unit, unit.dexterity, AddDexterity_Button);
+            UpdateData();
+            CheckingLimit(unit, unit.dexterity, ReduceDexterity_Button);
         }
 
         private void ReduceConstitution_Button_Click(object sender, RoutedEventArgs e)
         {
             unit.ManagementConstitutionWarrior('-');
-            ConstitutionTextBox.Text = unit.constitution[1].ToString();
-
-            UpdateSpecifications();
-            CheckingLimit(unit, unit.constitution, AddConstitution_Button);
+            UpdateData();
+            CheckingLimit(unit, unit.constitution, ReduceConstitution_Button);
         }
 
         private void ReduceIntelligence_Button_Click(object sender, RoutedEventArgs e)
         {
             unit.ManagementIntelligenceWarrior('-');
-            IntelligenceTextBox.Text = unit.intelligence[1].ToString();
-
-            UpdateSpecifications();
-            CheckingLimit(unit, unit.intelligence, AddIntelligence_Button);
+            UpdateData();
+            CheckingLimit(unit, unit.intelligence, ReduceIntelligence_Button);
         }
 
         // ------------------------------------------------------------------------------------------------------
@@ -158,12 +146,7 @@ namespace DistributionOfPoints
                 if (units[un].Name == unit.Name) units[un] = unit;
             }
 
-            StrengthTextBox.Text = unit.strength[1].ToString();
-            DexterityTextBox.Text = unit.dexterity[1].ToString();
-            ConstitutionTextBox.Text = unit.constitution[1].ToString();
-            IntelligenceTextBox.Text = unit.intelligence[1].ToString();
-
-            UpdateSpecifications();
+            UpdateData();
 
             AddStrength_Button.IsEnabled = true;
             AddDexterity_Button.IsEnabled = true;
@@ -192,9 +175,8 @@ namespace DistributionOfPoints
             }
         }
 
-        private void WarriorImg_MouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
+         private void UnitImg_MouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
         {
-            
             if (e.Delta > 0)
             {
                 if (Array.IndexOf(units, unit) == units.Length - 1)
@@ -238,40 +220,35 @@ namespace DistributionOfPoints
             }
         }
 
-        private void Window_Closed(object sender, EventArgs e)
-        {
-            MongoExamples.ReplaceByName(unit.Name, unit);
-        }
-
         private void SwitchingUnits(Unit unit)
         {
-            MongoExamples.ReplaceByName(this.unit.Name, this.unit);
+            MongoExamples.SaveValues(this.unit.Name, this.unit);
             this.unit = unit;
 
-            if (unit.Name == "Warrior")
+            if (unit.Name == "Warrior") 
             {
-                WarriorImg.Source = new BitmapImage(new Uri("/BTNKnight.png", UriKind.Relative));
+                UnitImg.Source = new BitmapImage(new Uri("/BTNKnight.png", UriKind.Relative));
                 Application.Current.Resources["DefoultColor"] = Application.Current.Resources["WarriorColor"];
-
             }
 
             if (unit.Name == "Rogue")
             {
-                WarriorImg.Source = new BitmapImage(new Uri("/BTNBandit.webp", UriKind.Relative));
+                UnitImg.Source = new BitmapImage(new Uri("/BTNBandit.webp", UriKind.Relative));
                 Application.Current.Resources["DefoultColor"] = Application.Current.Resources["RogueColor"];
             }
 
             if (unit.Name == "Wizard")
             {
-                WarriorImg.Source = new BitmapImage(new Uri("/BTNRogueWizard.webp", UriKind.Relative));
+                UnitImg.Source = new BitmapImage(new Uri("/BTNRogueWizard.webp", UriKind.Relative));
                 Application.Current.Resources["DefoultColor"] = Application.Current.Resources["WizardColor"];
             }
 
-            UpdateSpecifications();
-            StrengthTextBox.Text = unit.strength[1].ToString();
-            DexterityTextBox.Text = unit.dexterity[1].ToString();
-            ConstitutionTextBox.Text = unit.constitution[1].ToString();
-            IntelligenceTextBox.Text = unit.intelligence[1].ToString();
+            UpdateData();
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            MongoExamples.SaveValues(unit.Name, unit);
         }
     }
 }

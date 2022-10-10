@@ -73,7 +73,7 @@
         <Button x:Name="ResetButton" Content="Reset" HorizontalAlignment="Center" Margin="0,175,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="White" BorderBrush="Red" Height="24" Width="44" Cursor="Hand" Click="ResetButton_Click"/>
         <Label Content="Skill points left:" HorizontalAlignment="Center" Margin="0,103,0,0" VerticalAlignment="Top" Foreground="White"/>
         <TextBox x:Name="SkillPointsTextBox" HorizontalAlignment="Center" Margin="0,134,0,0" Text="000" TextWrapping="Wrap" VerticalAlignment="Top" Width="58" TextAlignment="Center" FontSize="18"/>
-        <Image x:Name="WarriorImg" HorizontalAlignment="Left" Height="75" Margin="495,17,0,0" VerticalAlignment="Top" Width="75" Stretch="Fill" StretchDirection="Both" Source="/BTNKnight.png" MouseWheel="WarriorImg_MouseWheel"/>
+        <Image x:Name="UnitImg" HorizontalAlignment="Left" Height="75" Margin="495,17,0,0" VerticalAlignment="Top" Width="75" Stretch="Fill" StretchDirection="Both" Source="/BTNKnight.png" MouseWheel="UnitImg_MouseWheel"/>
         <ComboBox x:Name="ComboBoxUnits" HorizontalAlignment="Center" Margin="0,22,0,0" VerticalAlignment="Top" Width="160" IsEditable="True" SelectionChanged="ComboBoxUnits_SelectionChanged" FontFamily="MV Boli" FontSize="36" Background="White">
             <ComboBoxItem Content="Warrior"/>
             <ComboBoxItem Content="Rogue"/>
