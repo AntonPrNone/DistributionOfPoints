@@ -24,7 +24,7 @@ namespace DistributionOfPoints
 
         private void DistributionOfPoints_Button_Click(object sender, RoutedEventArgs e)
         {
-            new WarriorWindow().Show();
+            new DistributionOfPointsWindow().Show();
             Close();
         }
     }

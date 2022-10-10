@@ -10,19 +10,21 @@ namespace DistributionOfPoints
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class WarriorWindow : Window
+    public partial class DistributionOfPointsWindow : Window
     {
         Unit unit;
+        Unit[] units;
         Unit warrior = MongoExamples.Find("Warrior");
         Unit rogue = MongoExamples.Find("Rogue");
         Unit wizard = MongoExamples.Find("Wizard");
 
         bool mouseScrolled = false;
 
-        public WarriorWindow()
+        public DistributionOfPointsWindow()
         {
             InitializeComponent();
 
+            units = new Unit[] { warrior, rogue, wizard };
             unit = warrior;
             ComboBoxUnits.SelectedIndex = 0;
 
@@ -149,7 +151,12 @@ namespace DistributionOfPoints
         private void ResetButton_Click(object sender, RoutedEventArgs e) // resetting characteristics
         {
             MongoExamples.ResetValues(unit.Name);
-            unit = MongoExamples.Find("Warrior");
+            unit = MongoExamples.Find(unit.Name);
+
+            for (int un = 0; un < units.Length; un++)
+            {
+                if (units[un].Name == unit.Name) units[un] = unit;
+            }
 
             StrengthTextBox.Text = unit.strength[1].ToString();
             DexterityTextBox.Text = unit.dexterity[1].ToString();
@@ -181,13 +188,13 @@ namespace DistributionOfPoints
                 else if (ComboBoxUnits.SelectedIndex == 2 && unit.Name != wizard.Name)
                 {
                     SwitchingUnits(wizard);
-                } 
+                }
             }
         }
 
         private void WarriorImg_MouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
         {
-            Unit[] units = { warrior, rogue, wizard };
+            
             if (e.Delta > 0)
             {
                 if (Array.IndexOf(units, unit) == units.Length - 1)
@@ -244,35 +251,20 @@ namespace DistributionOfPoints
             if (unit.Name == "Warrior")
             {
                 WarriorImg.Source = new BitmapImage(new Uri("/BTNKnight.png", UriKind.Relative));
+                Application.Current.Resources["DefoultColor"] = Application.Current.Resources["WarriorColor"];
 
-                GradientStopCollection gsc = new GradientStopCollection();
-                gsc.Add(new GradientStop()
-                {
-                    Color = Colors.Red,
-                    Offset = 0.0
-                });
-
-                gsc.Add(new GradientStop()
-                {
-                    Color = Colors.Black,
-                    Offset = 0.5
-                });
-
-                ProstoWindow.Background = new LinearGradientBrush(gsc, 0)
-                {
-                    StartPoint = new Point(0.5, 0),
-                    EndPoint = new Point(0.5, 1)
-                };
             }
 
             if (unit.Name == "Rogue")
             {
                 WarriorImg.Source = new BitmapImage(new Uri("/BTNBandit.webp", UriKind.Relative));
+                Application.Current.Resources["DefoultColor"] = Application.Current.Resources["RogueColor"];
             }
 
             if (unit.Name == "Wizard")
             {
                 WarriorImg.Source = new BitmapImage(new Uri("/BTNRogueWizard.webp", UriKind.Relative));
+                Application.Current.Resources["DefoultColor"] = Application.Current.Resources["WizardColor"];
             }
 
             UpdateSpecifications();

@@ -4,6 +4,25 @@
              xmlns:local="clr-namespace:DistributionOfPoints"
              StartupUri="StartWindow.xaml">
     <Application.Resources>
-         
+        <LinearGradientBrush x:Key="DefoultColor" EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="Black"/>
+            <GradientStop Color="#FF420000" Offset="1"/>
+        </LinearGradientBrush>
+        
+        
+        <LinearGradientBrush x:Key="WarriorColor" EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="Black"/>
+            <GradientStop Color="#FF420000" Offset="1"/>
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="RogueColor" EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="Black"/>
+            <GradientStop Color="#FF000042" Offset="1"/>
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="WizardColor" EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="Black"/>
+            <GradientStop Color="#FF210021" Offset="1"/>
+        </LinearGradientBrush>
     </Application.Resources>
 </Application>
