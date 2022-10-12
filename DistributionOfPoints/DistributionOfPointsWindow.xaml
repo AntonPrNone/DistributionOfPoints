@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DistributionOfPoints"
         mc:Ignorable="d"
-        Title="Distribution of skill points. Warrior. WarCraft |||" Height="450" Width="800" Visibility="Visible" WindowStartupLocation="CenterScreen" WindowStyle="SingleBorderWindow" BorderThickness="0,0,0,0" Icon="/icon.png" SizeToContent="Manual" Closed="Window_Closed" Background="{DynamicResource DefoultColor}">
+        Title="Distribution of skill points. Warrior. WarCraft |||" Height="450" Width="800" Visibility="Visible" WindowStartupLocation="CenterScreen" WindowStyle="SingleBorderWindow" BorderThickness="0,0,0,0" SizeToContent="Manual" Closed="Window_Closed" Background="{DynamicResource DefoultColor}" Icon="/img/icon.png">
     <Window.Resources>
-        <Color x:Key="GradientStopColorWarrior">#FF420000</Color>
+        
     </Window.Resources>
     <Grid x:Name="WindowGrid">
         <Label Content="Strength" HorizontalAlignment="Left" Margin="45,99,0,0" VerticalAlignment="Top" Foreground="White" FontWeight="Bold" FontSize="18"/>
@@ -73,7 +73,7 @@
         <Button x:Name="ResetButton" Content="Reset" HorizontalAlignment="Center" Margin="0,175,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="White" BorderBrush="Red" Height="24" Width="44" Cursor="Hand" Click="ResetButton_Click"/>
         <Label Content="Skill points left:" HorizontalAlignment="Center" Margin="0,103,0,0" VerticalAlignment="Top" Foreground="White"/>
         <TextBox x:Name="SkillPointsTextBox" HorizontalAlignment="Center" Margin="0,134,0,0" Text="000" TextWrapping="Wrap" VerticalAlignment="Top" Width="58" TextAlignment="Center" FontSize="18"/>
-        <Image x:Name="UnitImg" HorizontalAlignment="Left" Height="75" Margin="495,17,0,0" VerticalAlignment="Top" Width="75" Stretch="Fill" StretchDirection="Both" Source="/BTNKnight.png" MouseWheel="UnitImg_MouseWheel"/>
+        <Image x:Name="UnitImg" HorizontalAlignment="Left" Height="75" Margin="495,17,0,0" VerticalAlignment="Top" Width="75" Stretch="Fill" StretchDirection="Both" Source="/img/Warrior.png" MouseWheel="UnitImg_MouseWheel"/>
         <ComboBox x:Name="ComboBoxUnits" HorizontalAlignment="Center" Margin="0,22,0,0" VerticalAlignment="Top" Width="160" IsEditable="True" SelectionChanged="ComboBoxUnits_SelectionChanged" FontFamily="MV Boli" FontSize="36" Background="White">
             <ComboBoxItem Content="Warrior"/>
             <ComboBoxItem Content="Rogue"/>
@@ -83,5 +83,6 @@
         <Button x:Name="ReduceDexterity_Button" Content="-" HorizontalAlignment="Left" Margin="151,169,0,0" VerticalAlignment="Top" Background="#FF950A00" FontSize="20" Height="36" Foreground="White" BorderBrush="#FF610600" Width="18" Click="ReduceDexterity_Button_Click" Cursor="Hand"/>
         <Button x:Name="ReduceConstitution_Button" Content="-" HorizontalAlignment="Left" Margin="151,239,0,0" VerticalAlignment="Top" Background="#FF950A00" FontSize="20" Height="36" Foreground="White" BorderBrush="#FF610600" Width="18" Click="ReduceConstitution_Button_Click" Cursor="Hand"/>
         <Button x:Name="ReduceIntelligence_Button" Content="-" HorizontalAlignment="Left" Margin="151,309,0,0" VerticalAlignment="Top" Background="#FF950A00" FontSize="20" Height="36" Foreground="White" BorderBrush="#FF610600" Width="18" Click="ReduceIntelligence_Button_Click" Cursor="Hand"/>
+        <Image Margin="0,20,20,0" Stretch="Fill" Source="/img/iconBack.png" Width="50" Height="50" HorizontalAlignment="Right" VerticalAlignment="Top" Cursor="Hand" MouseDown="Image_MouseDown"/>
     </Grid>
 </Window>

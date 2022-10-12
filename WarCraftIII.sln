@@ -3,9 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.32630.194
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DistributionOfPoints", "DistributionOfPoints\DistributionOfPoints.csproj", "{85FACF8F-B0DC-46BD-9DC3-B393541B210B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WarCraftIII_WPF", "DistributionOfPoints\WarCraftIII_WPF.csproj", "{85FACF8F-B0DC-46BD-9DC3-B393541B210B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DistributionOfPoints_Console", "..\DistributionOfPoints_Console\DistributionOfPoints_Console\DistributionOfPoints_Console.csproj", "{61130FF1-4EA8-40A2-BAAE-4272CFB73625}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WarCraftIII_Logic", "..\DistributionOfPoints_Console\DistributionOfPoints_Console\WarCraftIII_Logic.csproj", "{61130FF1-4EA8-40A2-BAAE-4272CFB73625}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F875079D-5226-4DE3-8BF2-E72098FC2473}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

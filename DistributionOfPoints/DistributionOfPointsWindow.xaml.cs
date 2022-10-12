@@ -22,25 +22,15 @@ namespace DistributionOfPoints
         public DistributionOfPointsWindow()
         {
             InitializeComponent();
-
             units = new Unit[] { warrior, rogue, wizard };
             unit = warrior;
+            Application.Current.Resources["DefoultColor"] = Application.Current.Resources["WarriorColor"];
             ComboBoxUnits.SelectedIndex = 0;
 
-            SkillPointsTextBox.Text = unit.skillPoints.ToString();
-            StrengthTextBox.Text = unit.strength[1].ToString();
-            DexterityTextBox.Text = unit.dexterity[1].ToString();
-            ConstitutionTextBox.Text = unit.constitution[1].ToString();
-            IntelligenceTextBox.Text = unit.intelligence[1].ToString();
-
-            MaxHPLabel.Content = unit.maxHP;
-            MaxMPLabel.Content = unit.maxMP;
-            PAttackLabel.Content = unit.PAttack;
-            MAttackLabel.Content = unit.MAttack;
-            PDefLabel.Content = unit.PDef;
+            UpdateData();
         }
 
-        private void UpdateData() // updating the display of indicators
+        private void UpdateData() // Updating the display of data
         {
             SkillPointsTextBox.Text = unit.skillPoints.ToString();
 
@@ -56,23 +46,32 @@ namespace DistributionOfPoints
             IntelligenceTextBox.Text = unit.intelligence[1].ToString();
         }
 
-        private void CheckingLimit(Unit unit, int[] characteristic, Button button) // checking the achievement of the limit of skill points and levels of characteristics
+        private void CheckingLimit(Unit unit, int[] characteristic, Button buttonplus, Button buttonminus) // Checking the achievement of the limit of skill points and levels of characteristics
         {
             if (unit.skillPoints == 0)
             {
                 MessageBox.Show("Skill points are over", "The limit has been reached",
          MessageBoxButton.OK, MessageBoxImage.Information);
-                AddStrength_Button.IsEnabled = false;
-                AddDexterity_Button.IsEnabled = false;
-                AddConstitution_Button.IsEnabled = false;
-                AddIntelligence_Button.IsEnabled = false;
             }
 
-            if (characteristic[1] >= characteristic[2])
+            else if (characteristic[1] >= characteristic[2])
             {
                 MessageBox.Show("The maximum characteristic level has been reached", "The limit has been reached",
          MessageBoxButton.OK, MessageBoxImage.Information);
-                button.IsEnabled = false;
+                buttonplus.Foreground = System.Windows.Media.Brushes.Black;
+            }
+
+            else if (characteristic[0] >= characteristic[1])
+            {
+                MessageBox.Show("The minimum characteristic level has been reached", "The limit has been reached",
+         MessageBoxButton.OK, MessageBoxImage.Information);
+                buttonminus.Foreground = System.Windows.Media.Brushes.Black;
+            }
+
+            else
+            {
+                buttonplus.Foreground = System.Windows.Media.Brushes.White;
+                buttonminus.Foreground = System.Windows.Media.Brushes.White;
             }
         }
 
@@ -82,61 +81,61 @@ namespace DistributionOfPoints
         {
             unit.ManagementStrengthWarrior('+');
             UpdateData();
-            CheckingLimit(unit, unit.strength, AddStrength_Button);
+            CheckingLimit(unit, unit.strength, AddStrength_Button, ReduceStrength_Button);
         }
 
         private void AddDexterity_Button_Click(object sender, RoutedEventArgs e)
         {
             unit.ManagementDexterityWarrior('+');
             UpdateData();
-            CheckingLimit(unit, unit.dexterity, AddDexterity_Button);
+            CheckingLimit(unit, unit.dexterity, AddDexterity_Button, ReduceDexterity_Button);
         }
 
         private void AddConstitution_Button_Click(object sender, RoutedEventArgs e)
         {
             unit.ManagementConstitutionWarrior('+');
             UpdateData();
-            CheckingLimit(unit, unit.constitution, AddConstitution_Button);
+            CheckingLimit(unit, unit.constitution, AddConstitution_Button, ReduceConstitution_Button);
         }
 
         private void AddIntelligence_Button_Click(object sender, RoutedEventArgs e)
         {
             unit.ManagementIntelligenceWarrior('+');
             UpdateData();
-            CheckingLimit(unit, unit.intelligence, AddIntelligence_Button);
+            CheckingLimit(unit, unit.intelligence, AddIntelligence_Button, ReduceIntelligence_Button);
         }
 
         private void ReduceStrength_Button_Click(object sender, RoutedEventArgs e)
         {
             unit.ManagementStrengthWarrior('-');
             UpdateData();
-            CheckingLimit(unit, unit.strength, ReduceStrength_Button);
+            CheckingLimit(unit, unit.strength, AddStrength_Button, ReduceStrength_Button);
         }
 
         private void ReduceDexterity_Button_Click(object sender, RoutedEventArgs e)
         {
             unit.ManagementDexterityWarrior('-');
             UpdateData();
-            CheckingLimit(unit, unit.dexterity, ReduceDexterity_Button);
+            CheckingLimit(unit, unit.dexterity, AddDexterity_Button, ReduceDexterity_Button);
         }
 
         private void ReduceConstitution_Button_Click(object sender, RoutedEventArgs e)
         {
             unit.ManagementConstitutionWarrior('-');
             UpdateData();
-            CheckingLimit(unit, unit.constitution, ReduceConstitution_Button);
+            CheckingLimit(unit, unit.constitution, AddConstitution_Button, ReduceConstitution_Button);
         }
 
         private void ReduceIntelligence_Button_Click(object sender, RoutedEventArgs e)
         {
             unit.ManagementIntelligenceWarrior('-');
             UpdateData();
-            CheckingLimit(unit, unit.intelligence, ReduceIntelligence_Button);
+            CheckingLimit(unit, unit.intelligence, AddIntelligence_Button, ReduceIntelligence_Button);
         }
 
         // ------------------------------------------------------------------------------------------------------
 
-        private void ResetButton_Click(object sender, RoutedEventArgs e) // resetting characteristics
+        private void ResetButton_Click(object sender, RoutedEventArgs e) // Reset characteristics
         {
             MongoExamples.ResetValues(unit.Name);
             unit = MongoExamples.Find(unit.Name);
@@ -147,14 +146,22 @@ namespace DistributionOfPoints
             }
 
             UpdateData();
-
-            AddStrength_Button.IsEnabled = true;
-            AddDexterity_Button.IsEnabled = true;
-            AddConstitution_Button.IsEnabled = true;
-            AddIntelligence_Button.IsEnabled = true;
+            ResetColorButtons();
         }
 
-        private void ComboBoxUnits_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ResetColorButtons() // reset button colors
+        {
+            AddConstitution_Button.Foreground = System.Windows.Media.Brushes.White;
+            AddDexterity_Button.Foreground = System.Windows.Media.Brushes.White;
+            AddStrength_Button.Foreground = System.Windows.Media.Brushes.White;
+            AddIntelligence_Button.Foreground = System.Windows.Media.Brushes.White;
+            ReduceConstitution_Button.Foreground = System.Windows.Media.Brushes.White;
+            ReduceDexterity_Button.Foreground = System.Windows.Media.Brushes.White;
+            ReduceStrength_Button.Foreground = System.Windows.Media.Brushes.White;
+            ReduceIntelligence_Button.Foreground = System.Windows.Media.Brushes.White;
+        }
+
+        private void ComboBoxUnits_SelectionChanged(object sender, SelectionChangedEventArgs e) // Changing a character with ComboBox
         {
             if (!mouseScrolled)
             {
@@ -175,7 +182,7 @@ namespace DistributionOfPoints
             }
         }
 
-         private void UnitImg_MouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
+        private void UnitImg_MouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e) // Changing a character with Scroll
         {
             if (e.Delta > 0)
             {
@@ -220,35 +227,42 @@ namespace DistributionOfPoints
             }
         }
 
-        private void SwitchingUnits(Unit unit)
+        private void SwitchingUnits(Unit unit) // Changing a character
         {
             MongoExamples.SaveValues(this.unit.Name, this.unit);
             this.unit = unit;
 
-            if (unit.Name == "Warrior") 
+            if (unit.Name == "Warrior")
             {
-                UnitImg.Source = new BitmapImage(new Uri("/BTNKnight.png", UriKind.Relative));
+                UnitImg.Source = new BitmapImage(new Uri("/img/Warrior.png", UriKind.Relative));
                 Application.Current.Resources["DefoultColor"] = Application.Current.Resources["WarriorColor"];
             }
 
             if (unit.Name == "Rogue")
             {
-                UnitImg.Source = new BitmapImage(new Uri("/BTNBandit.webp", UriKind.Relative));
+                UnitImg.Source = new BitmapImage(new Uri("/img/Rogue.png", UriKind.Relative));
                 Application.Current.Resources["DefoultColor"] = Application.Current.Resources["RogueColor"];
             }
 
             if (unit.Name == "Wizard")
             {
-                UnitImg.Source = new BitmapImage(new Uri("/BTNRogueWizard.webp", UriKind.Relative));
+                UnitImg.Source = new BitmapImage(new Uri("/img/Wizard.png", UriKind.Relative));
                 Application.Current.Resources["DefoultColor"] = Application.Current.Resources["WizardColor"];
             }
 
             UpdateData();
+            ResetColorButtons();
         }
 
         private void Window_Closed(object sender, EventArgs e)
         {
             MongoExamples.SaveValues(unit.Name, unit);
+        }
+
+        private void Image_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            new StartWindow().Show();
+            Close();
         }
     }
 }

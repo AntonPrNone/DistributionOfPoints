@@ -1,0 +1,53 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="BG1.jpeg" />
+    <None Remove="BTNBandit.webp" />
+    <None Remove="BTNKnight.png" />
+    <None Remove="BTNRogueWizard.webp" />
+    <None Remove="icon.png" />
+    <None Remove="icons8-warcraft-iii-100.png" />
+    <None Remove="img\BG1.jpeg" />
+    <None Remove="img\icoClose.png" />
+    <None Remove="img\icoMinimize.png" />
+    <None Remove="img\icon.png" />
+    <None Remove="img\iconBack.png" />
+    <None Remove="img\Rogue.png" />
+    <None Remove="img\Warrior.png" />
+    <None Remove="img\Wizard.png" />
+    <None Remove="Warrior.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MongoDB.Bson" Version="2.17.1" />
+    <PackageReference Include="MongoDB.Driver" Version="2.17.1" />
+    <PackageReference Include="MongoDB.Driver.Core" Version="2.17.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\DistributionOfPoints_Console\DistributionOfPoints_Console\WarCraftIII_Logic.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="img\BG1.jpeg" />
+    <Resource Include="img\icon.png" />
+    <Resource Include="img\icoClose.png" />
+    <Resource Include="img\icoMinimize.png" />
+    <Resource Include="img\iconBack.png" />
+    <Resource Include="img\Rogue.png" />
+    <Resource Include="img\Warrior.png" />
+    <Resource Include="img\Wizard.png" />
+  </ItemGroup>
+
+</Project>
