@@ -83,6 +83,6 @@
         <Button x:Name="ReduceDexterity_Button" Content="-" HorizontalAlignment="Left" Margin="151,169,0,0" VerticalAlignment="Top" Background="#FF950A00" FontSize="20" Height="36" Foreground="White" BorderBrush="#FF610600" Width="18" Click="ReduceDexterity_Button_Click" Cursor="Hand"/>
         <Button x:Name="ReduceConstitution_Button" Content="-" HorizontalAlignment="Left" Margin="151,239,0,0" VerticalAlignment="Top" Background="#FF950A00" FontSize="20" Height="36" Foreground="White" BorderBrush="#FF610600" Width="18" Click="ReduceConstitution_Button_Click" Cursor="Hand"/>
         <Button x:Name="ReduceIntelligence_Button" Content="-" HorizontalAlignment="Left" Margin="151,309,0,0" VerticalAlignment="Top" Background="#FF950A00" FontSize="20" Height="36" Foreground="White" BorderBrush="#FF610600" Width="18" Click="ReduceIntelligence_Button_Click" Cursor="Hand"/>
-        <Image Margin="0,20,20,0" Stretch="Fill" Source="/img/iconBack.png" Width="50" Height="50" HorizontalAlignment="Right" VerticalAlignment="Top" Cursor="Hand" MouseDown="Image_MouseDown"/>
+        <Image x:Name="ButtonBack" Margin="0,20,20,0" Stretch="Fill" Source="/img/iconBack.png" Width="50" Height="50" HorizontalAlignment="Right" VerticalAlignment="Top" Cursor="Hand" MouseDown="Image_MouseDown" MouseEnter="ButtonBack_MouseEnter" MouseLeave="ButtonBack_MouseLeave"/>
     </Grid>
 </Window>

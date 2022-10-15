@@ -28,12 +28,12 @@ namespace DistributionOfPoints
             Close();
         }
 
-        private void imgClose_MouseDown(object sender, MouseButtonEventArgs e)
+        private void ImgClose_MouseDown(object sender, MouseButtonEventArgs e)
         {
             Close();
         }
 
-        private void imgMinimize_MouseDown(object sender, MouseButtonEventArgs e)
+        private void ImgMinimize_MouseDown(object sender, MouseButtonEventArgs e)
         {
             WindowState = WindowState.Minimized;
         }

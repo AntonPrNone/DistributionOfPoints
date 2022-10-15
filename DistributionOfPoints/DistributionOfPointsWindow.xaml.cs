@@ -32,23 +32,23 @@ namespace DistributionOfPoints
 
         private void UpdateData() // Updating the display of data
         {
-            SkillPointsTextBox.Text = unit.skillPoints.ToString();
+            SkillPointsTextBox.Text = unit.SkillPoints.ToString();
 
-            MaxHPLabel.Content = unit.maxHP;
-            MaxMPLabel.Content = unit.maxMP;
+            MaxHPLabel.Content = unit.MaxHP;
+            MaxMPLabel.Content = unit.MaxMP;
             PAttackLabel.Content = unit.PAttack;
             MAttackLabel.Content = unit.MAttack;
             PDefLabel.Content = unit.PDef;
 
-            StrengthTextBox.Text = unit.strength[1].ToString();
-            DexterityTextBox.Text = unit.dexterity[1].ToString();
-            ConstitutionTextBox.Text = unit.constitution[1].ToString();
-            IntelligenceTextBox.Text = unit.intelligence[1].ToString();
+            StrengthTextBox.Text = unit.Strength[1].ToString();
+            DexterityTextBox.Text = unit.Dexterity[1].ToString();
+            ConstitutionTextBox.Text = unit.Constitution[1].ToString();
+            IntelligenceTextBox.Text = unit.Intelligence[1].ToString();
         }
 
         private void CheckingLimit(Unit unit, int[] characteristic, Button buttonplus, Button buttonminus) // Checking the achievement of the limit of skill points and levels of characteristics
         {
-            if (unit.skillPoints == 0)
+            if (unit.SkillPoints == 0)
             {
                 MessageBox.Show("Skill points are over", "The limit has been reached",
          MessageBoxButton.OK, MessageBoxImage.Information);
@@ -81,56 +81,56 @@ namespace DistributionOfPoints
         {
             unit.ManagementStrengthWarrior('+');
             UpdateData();
-            CheckingLimit(unit, unit.strength, AddStrength_Button, ReduceStrength_Button);
+            CheckingLimit(unit, unit.Strength, AddStrength_Button, ReduceStrength_Button);
         }
 
         private void AddDexterity_Button_Click(object sender, RoutedEventArgs e)
         {
             unit.ManagementDexterityWarrior('+');
             UpdateData();
-            CheckingLimit(unit, unit.dexterity, AddDexterity_Button, ReduceDexterity_Button);
+            CheckingLimit(unit, unit.Dexterity, AddDexterity_Button, ReduceDexterity_Button);
         }
 
         private void AddConstitution_Button_Click(object sender, RoutedEventArgs e)
         {
             unit.ManagementConstitutionWarrior('+');
             UpdateData();
-            CheckingLimit(unit, unit.constitution, AddConstitution_Button, ReduceConstitution_Button);
+            CheckingLimit(unit, unit.Constitution, AddConstitution_Button, ReduceConstitution_Button);
         }
 
         private void AddIntelligence_Button_Click(object sender, RoutedEventArgs e)
         {
             unit.ManagementIntelligenceWarrior('+');
             UpdateData();
-            CheckingLimit(unit, unit.intelligence, AddIntelligence_Button, ReduceIntelligence_Button);
+            CheckingLimit(unit, unit.Intelligence, AddIntelligence_Button, ReduceIntelligence_Button);
         }
 
         private void ReduceStrength_Button_Click(object sender, RoutedEventArgs e)
         {
             unit.ManagementStrengthWarrior('-');
             UpdateData();
-            CheckingLimit(unit, unit.strength, AddStrength_Button, ReduceStrength_Button);
+            CheckingLimit(unit, unit.Strength, AddStrength_Button, ReduceStrength_Button);
         }
 
         private void ReduceDexterity_Button_Click(object sender, RoutedEventArgs e)
         {
             unit.ManagementDexterityWarrior('-');
             UpdateData();
-            CheckingLimit(unit, unit.dexterity, AddDexterity_Button, ReduceDexterity_Button);
+            CheckingLimit(unit, unit.Dexterity, AddDexterity_Button, ReduceDexterity_Button);
         }
 
         private void ReduceConstitution_Button_Click(object sender, RoutedEventArgs e)
         {
             unit.ManagementConstitutionWarrior('-');
             UpdateData();
-            CheckingLimit(unit, unit.constitution, AddConstitution_Button, ReduceConstitution_Button);
+            CheckingLimit(unit, unit.Constitution, AddConstitution_Button, ReduceConstitution_Button);
         }
 
         private void ReduceIntelligence_Button_Click(object sender, RoutedEventArgs e)
         {
             unit.ManagementIntelligenceWarrior('-');
             UpdateData();
-            CheckingLimit(unit, unit.intelligence, AddIntelligence_Button, ReduceIntelligence_Button);
+            CheckingLimit(unit, unit.Intelligence, AddIntelligence_Button, ReduceIntelligence_Button);
         }
 
         // ------------------------------------------------------------------------------------------------------
@@ -213,7 +213,7 @@ namespace DistributionOfPoints
                     ComboBoxUnits.SelectedIndex = units.Length - 1;
                     mouseScrolled = false;
 
-                    SwitchingUnits(units[units.Length - 1]);
+                    SwitchingUnits(units[^1]);
                 }
 
                 else
@@ -263,6 +263,16 @@ namespace DistributionOfPoints
         {
             new StartWindow().Show();
             Close();
+        }
+
+        private void ButtonBack_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            ButtonBack.Source = new BitmapImage(new Uri("/img/iconBack2.png", UriKind.Relative));
+        }
+
+        private void ButtonBack_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            ButtonBack.Source = new BitmapImage(new Uri("/img/iconBack.png", UriKind.Relative));
         }
     }
 }
