@@ -1,9 +1,9 @@
-﻿<Window x:Class="DistributionOfPoints.DistributionOfPointsWindow"
+﻿<Window x:Class="WarCraftIII_WPF.DistributionOfPointsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:DistributionOfPoints"
+        xmlns:local="clr-namespace:WarCraftIII_WPF"
         mc:Ignorable="d"
         Title="Distribution of skill points. Warrior. WarCraft |||" Height="450" Width="800" Visibility="Visible" WindowStartupLocation="CenterScreen" WindowStyle="SingleBorderWindow" BorderThickness="0,0,0,0" SizeToContent="Manual" Closed="Window_Closed" Background="{DynamicResource DefoultColor}" Icon="/img/icon.png">
     <Window.Resources>

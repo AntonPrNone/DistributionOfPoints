@@ -2,9 +2,9 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
-using DistributionOfPoints_Console;
+using WarCraftIII_Logic;
 
-namespace DistributionOfPoints
+namespace WarCraftIII_WPF
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
