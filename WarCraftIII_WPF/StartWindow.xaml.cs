@@ -45,5 +45,11 @@ namespace WarCraftIII_WPF
                 DragMove();
             }
         }
+
+        private void Inventory_Button_Click(object sender, RoutedEventArgs e)
+        {
+            new Inventory().Show();
+            Close();
+        }
     }
 }

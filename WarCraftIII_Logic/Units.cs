@@ -1,4 +1,5 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
+using System.Collections.Generic;
 
 namespace WarCraftIII_Logic
 {
@@ -10,6 +11,18 @@ namespace WarCraftIII_Logic
 
         public int SkillPoints { get; private set; }
         public int SkillPointsMax { get; private set; }
+        public int MaxEx { get; private set; }
+        private int Ex;
+        public int Exp
+        {
+            get => Ex;
+            set
+            {
+                Ex = value;
+                if (MaxEx == Ex) UpLvl();
+            }
+        }
+        public int Lvl { get; private set; }
         public double MaxHP { get; private set; }
         public double MaxMP { get; private set; }
         public double PAttack { get; private set; }
@@ -22,22 +35,34 @@ namespace WarCraftIII_Logic
         public int[] Constitution { get; private set; }
         public int[] Intelligence { get; private set; }
 
-        public Unit(string Name, int skillPoints, int skillPointsMax, double maxHP, double maxMP, double PAttack, double MAttack,
-                    double PDef, int[] strength, int[] dexterity, int[] constitution, int[] intelligence) // Manual creation
-        {
-            this.Name = Name;
-            this.SkillPoints = skillPoints;
-            this.SkillPointsMax = skillPointsMax;
-            this.MaxHP = maxHP;
-            this.MaxMP = maxMP;
-            this.PAttack = PAttack;
-            this.MAttack = MAttack;
-            this.PDef = PDef;
+        public List<string> Inventory { get; private set; }
 
-            this.Strength = strength;
-            this.Dexterity = dexterity;
-            this.Constitution = constitution;
-            this.Intelligence = intelligence;
+        public Unit(string name, int skillPoints, int skillPointsMax, int ex, int maxEx, double maxHP, double maxMP,
+                    double pAttack, double mAttack, double pDef, int[] strength, int[] dexterity, int[] constitution,
+                    int[] intelligence) // Manual creation
+        {
+            Name = name;
+            SkillPoints = skillPoints;
+            SkillPointsMax = skillPointsMax;
+            Ex = ex;
+            MaxEx = maxEx;
+            MaxHP = maxHP;
+            MaxMP = maxMP;
+            PAttack = pAttack;
+            MAttack = mAttack;
+            PDef = pDef;
+
+            Strength = strength;
+            Dexterity = dexterity;
+            Constitution = constitution;
+            Intelligence = intelligence;
+        }
+
+        public void UpLvl()
+        {
+            Ex = 0;
+            MaxEx *= 2;
+            Lvl++;
         }
 
         // ---------------------------------------------------- WARRIOR ----------------------------------------------------
@@ -292,6 +317,18 @@ namespace WarCraftIII_Logic
                 MaxMP -= 2;
                 MAttack -= 5;
             }
+        }
+
+        // ---------------------------------------------------- *INVENTORY* ----------------------------------------------------
+
+        public void AddInventory(string loot)
+        {
+            Inventory.Add(loot);
+        }
+
+        public void RemoveInventory(string loot)
+        {
+            Inventory.Remove(loot);
         }
     }
 }

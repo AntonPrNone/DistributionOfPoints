@@ -14,6 +14,15 @@ namespace WarCraftIII_Logic
             return document;
         }
 
+        public static string[] FindMaxInventory() // Returns a document
+        {
+            var client = new MongoClient();
+            var database = client.GetDatabase("DB");
+            var collection = database.GetCollection<MaxInventory_Class>("Units");
+            var document = collection.Find(x => x.Name == "MaxInventory").FirstOrDefault();
+            return document.MaxInventory;
+        }
+
         public static void SaveValues(string name, Unit unit) // Replaces the document
         {
             var client = new MongoClient();

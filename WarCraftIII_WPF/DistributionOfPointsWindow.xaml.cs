@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
@@ -30,6 +31,11 @@ namespace WarCraftIII_WPF
             UpdateData();
         }
 
+        private void Window_ContentRendered(object sender, EventArgs e)
+        {
+
+        }
+
         private void UpdateData() // Updating the display of data
         {
             SkillPointsTextBox.Text = unit.SkillPoints.ToString();
@@ -44,9 +50,14 @@ namespace WarCraftIII_WPF
             DexterityTextBox.Text = unit.Dexterity[1].ToString();
             ConstitutionTextBox.Text = unit.Constitution[1].ToString();
             IntelligenceTextBox.Text = unit.Intelligence[1].ToString();
+
+            ProgressEx.Value = unit.Exp;
+            ProgressEx.Maximum = unit.MaxEx;
+            Ex_Label.Content = unit.Exp + "/" + unit.MaxEx;
+            Lvl_Label.Content = unit.Lvl + " LVL";
         }
 
-        private void CheckingLimit(Unit unit, int[] characteristic, Button buttonplus, Button buttonminus) // Checking the achievement of the limit of skill points and levels of characteristics
+        private bool CheckingLimit(Unit unit, int[] characteristic, Button buttonplus, Button buttonminus) // Checking the achievement of the limit of skill points and levels of characteristics
         {
             if (unit.SkillPoints == 0)
             {
@@ -72,7 +83,10 @@ namespace WarCraftIII_WPF
             {
                 buttonplus.Foreground = System.Windows.Media.Brushes.White;
                 buttonminus.Foreground = System.Windows.Media.Brushes.White;
+                return false;
             }
+
+            return true;
         }
 
         // -------------------------------------- MANAGING CHARACTERISTICS --------------------------------------
@@ -80,57 +94,57 @@ namespace WarCraftIII_WPF
         private void AddStrength_Button_Click(object sender, RoutedEventArgs e)
         {
             unit.ManagementStrengthWarrior('+');
+            if (!CheckingLimit(unit, unit.Strength, AddStrength_Button, ReduceStrength_Button)) unit.Exp++;
             UpdateData();
-            CheckingLimit(unit, unit.Strength, AddStrength_Button, ReduceStrength_Button);
         }
 
         private void AddDexterity_Button_Click(object sender, RoutedEventArgs e)
         {
             unit.ManagementDexterityWarrior('+');
+            if (!CheckingLimit(unit, unit.Dexterity, AddDexterity_Button, ReduceDexterity_Button)) unit.Exp++;
             UpdateData();
-            CheckingLimit(unit, unit.Dexterity, AddDexterity_Button, ReduceDexterity_Button);
         }
 
         private void AddConstitution_Button_Click(object sender, RoutedEventArgs e)
         {
             unit.ManagementConstitutionWarrior('+');
+            if (!CheckingLimit(unit, unit.Constitution, AddConstitution_Button, ReduceConstitution_Button)) unit.Exp++;
             UpdateData();
-            CheckingLimit(unit, unit.Constitution, AddConstitution_Button, ReduceConstitution_Button);
         }
 
         private void AddIntelligence_Button_Click(object sender, RoutedEventArgs e)
         {
             unit.ManagementIntelligenceWarrior('+');
+            if (!CheckingLimit(unit, unit.Intelligence, AddIntelligence_Button, ReduceIntelligence_Button)) unit.Exp++;
             UpdateData();
-            CheckingLimit(unit, unit.Intelligence, AddIntelligence_Button, ReduceIntelligence_Button);
         }
 
         private void ReduceStrength_Button_Click(object sender, RoutedEventArgs e)
         {
             unit.ManagementStrengthWarrior('-');
+            if (!CheckingLimit(unit, unit.Strength, AddStrength_Button, ReduceStrength_Button)) unit.Exp--;
             UpdateData();
-            CheckingLimit(unit, unit.Strength, AddStrength_Button, ReduceStrength_Button);
         }
 
         private void ReduceDexterity_Button_Click(object sender, RoutedEventArgs e)
         {
             unit.ManagementDexterityWarrior('-');
+            if (!CheckingLimit(unit, unit.Dexterity, AddDexterity_Button, ReduceDexterity_Button)) unit.Exp--;
             UpdateData();
-            CheckingLimit(unit, unit.Dexterity, AddDexterity_Button, ReduceDexterity_Button);
         }
 
         private void ReduceConstitution_Button_Click(object sender, RoutedEventArgs e)
         {
             unit.ManagementConstitutionWarrior('-');
+            if (!CheckingLimit(unit, unit.Constitution, AddConstitution_Button, ReduceConstitution_Button)) unit.Exp--;
             UpdateData();
-            CheckingLimit(unit, unit.Constitution, AddConstitution_Button, ReduceConstitution_Button);
         }
 
         private void ReduceIntelligence_Button_Click(object sender, RoutedEventArgs e)
         {
             unit.ManagementIntelligenceWarrior('-');
+            if (!CheckingLimit(unit, unit.Intelligence, AddIntelligence_Button, ReduceIntelligence_Button)) unit.Exp--;
             UpdateData();
-            CheckingLimit(unit, unit.Intelligence, AddIntelligence_Button, ReduceIntelligence_Button);
         }
 
         // ------------------------------------------------------------------------------------------------------
@@ -273,6 +287,21 @@ namespace WarCraftIII_WPF
         private void ButtonBack_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
         {
             ButtonBack.Source = new BitmapImage(new Uri("/img/iconBack.png", UriKind.Relative));
+        }
+
+        private void ProgressEx_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            ProgressEx.Foreground = System.Windows.Media.Brushes.White;
+            ProgressEx.Background = (System.Windows.Media.Brush)Application.Current.Resources["ProgressBarColorGradient"];
+            ExPlus_Label.Content = "+" + (unit.MaxEx - unit.Exp);
+            ExPlus_Label.Visibility = Visibility.Visible;
+        }
+
+        private void ProgressEx_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            ProgressEx.Foreground = (System.Windows.Media.Brush)Application.Current.Resources["ProgressBarColorGradient"];
+            ProgressEx.Background = System.Windows.Media.Brushes.White;
+            ExPlus_Label.Visibility = Visibility.Hidden;
         }
     }
 }

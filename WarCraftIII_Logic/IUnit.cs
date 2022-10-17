@@ -16,5 +16,7 @@
         void ManagementDexterityWizard(char sign);
         void ManagementConstitutionWizard(char sign);
         void ManagementIntelligenceWizard(char sign);
+
+        void UpLvl();
     }
 }
