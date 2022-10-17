@@ -92,10 +92,10 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Border BorderThickness="2,2,2,2" BorderBrush="Black" CornerRadius="5,5,5,5" Grid.Row="0" Grid.Column="0" Visibility="Visible">
-                <Image x:Name="Bow0" Source="/img/loot/bow.png" MouseDown="LootImg_MouseDown" Visibility="Visible"/>
+                <Image x:Name="Bow0" Source="/img/loot/bow.png" MouseDown="LootlandImg_MouseDown" Visibility="Visible"/>
             </Border>
             <Border BorderThickness="2,2,2,2" BorderBrush="Blue" CornerRadius="5,5,5,5" Grid.Row="0" Grid.Column="1">
-                <Image x:Name="Sword0" Source="/img/loot/sword.png" MouseDown="LootImg_MouseDown" Visibility="Visible"/>
+                <Image x:Name="Sword0" Source="/img/loot/sword.png" MouseDown="LootlandImg_MouseDown" Visibility="Visible"/>
             </Border>
             <Border BorderThickness="3,3,3,3" CornerRadius="5,5,5,5" Grid.Row="0" Grid.Column="2">
                 <Border.BorderBrush>
@@ -108,13 +108,13 @@
                         <GradientStop Color="Magenta" Offset="0.8"/>
                     </LinearGradientBrush>
                 </Border.BorderBrush>
-                <Image x:Name="MagicStaff0" Source="/img/loot/magicStaff.png" MouseDown="LootImg_MouseDown" Visibility="Visible"/>
+                <Image x:Name="MagicStaff0" Source="/img/loot/magicStaff.png" MouseDown="LootlandImg_MouseDown" Visibility="Visible"/>
             </Border>
             <Border BorderThickness="2,2,2,2" BorderBrush="Black" CornerRadius="5,5,5,5" Grid.Row="1" Grid.Column="0">
-                <Image x:Name="HelmetBronze0" Source="/img/loot/helmetBronze.png" MouseDown="LootImg_MouseDown" Visibility="Visible"/>
+                <Image x:Name="HelmetBronze0" Source="/img/loot/helmetBronze.png" MouseDown="LootlandImg_MouseDown" Visibility="Visible"/>
             </Border>
             <Border BorderThickness="2,2,2,2" BorderBrush="Blue" CornerRadius="5,5,5,5" Grid.Row="1" Grid.Column="1">
-                <Image x:Name="HelmetIron0" Source="/img/loot/helmetIron.png" MouseDown="LootImg_MouseDown" Visibility="Visible"/>
+                <Image x:Name="HelmetIron0" Source="/img/loot/helmetIron.png" MouseDown="LootlandImg_MouseDown" Visibility="Visible"/>
             </Border>
             <Border BorderThickness="3,3,3,3" CornerRadius="5,5,5,5" Grid.Row="1" Grid.Column="2">
                 <Border.BorderBrush>
@@ -127,13 +127,13 @@
                         <GradientStop Color="Magenta" Offset="0.8"/>
                     </LinearGradientBrush>
                 </Border.BorderBrush>
-                <Image x:Name="HelmetMythical0" Source="/img/loot/helmetMythical.png" MouseDown="LootImg_MouseDown" Visibility="Visible"/>
+                <Image x:Name="HelmetMythical0" Source="/img/loot/helmetMythical.png" MouseDown="LootlandImg_MouseDown" Visibility="Visible"/>
             </Border>
             <Border BorderThickness="2,2,2,2" BorderBrush="Black" CornerRadius="5,5,5,5" Grid.Row="2" Grid.Column="0">
-                <Image x:Name="BreastplateBronze0" Source="/img/loot/breastplateBronze.png" MouseDown="LootImg_MouseDown" Visibility="Visible"/>
+                <Image x:Name="BreastplateBronze0" Source="/img/loot/breastplateBronze.png" MouseDown="LootlandImg_MouseDown" Visibility="Visible"/>
             </Border>
             <Border BorderThickness="2,2,2,2" BorderBrush="Blue" CornerRadius="5,5,5,5" Grid.Row="2" Grid.Column="1">
-                <Image x:Name="BreastplateIron0" Source="/img/loot/breastplateIron.png" MouseDown="LootImg_MouseDown" Visibility="Visible"/>
+                <Image x:Name="BreastplateIron0" Source="/img/loot/breastplateIron.png" MouseDown="LootlandImg_MouseDown" Visibility="Visible"/>
             </Border>
             <Border BorderThickness="3,3,3,3" CornerRadius="5,5,5,5" Grid.Row="2" Grid.Column="2">
                 <Border.BorderBrush>
@@ -146,7 +146,7 @@
                         <GradientStop Color="Magenta" Offset="0.8"/>
                     </LinearGradientBrush>
                 </Border.BorderBrush>
-                <Image x:Name="BreastplateMythical0" Source="/img/loot/breastplateMythical.png" Visibility="Visible" MouseDown="LootImg_MouseDown"/>
+                <Image x:Name="BreastplateMythical0" Source="/img/loot/breastplateMythical.png" Visibility="Visible" MouseDown="LootlandImg_MouseDown"/>
             </Border>
         </Grid>
     </Grid>

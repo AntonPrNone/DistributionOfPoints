@@ -17,7 +17,8 @@ namespace WarCraftIII_WPF
         private Unit warrior = MongoExamples.Find("Warrior");
         private Unit rogue = MongoExamples.Find("Rogue");
         private Unit wizard = MongoExamples.Find("Wizard");
-        private string[] MaxInventory = MongoExamples.FindMaxInventory();
+        private List<string> MaxInventory = MongoExamples.FindMaxInventory();
+        private List<Image> imgs;
 
         public Inventory()
         {
@@ -34,6 +35,9 @@ namespace WarCraftIII_WPF
             if (unit.Inventory.Contains("BreastplateBronze")) BreastplateBronze.Visibility = Visibility.Visible;
             if (unit.Inventory.Contains("BreastplateIron")) BreastplateIron.Visibility = Visibility.Visible;
             if (unit.Inventory.Contains("BreastplateMythical")) BreastplateMythical.Visibility = Visibility.Visible;
+
+            imgs = new List<Image>() { Sword, Bow, MagicStaff, BreastplateBronze, BreastplateIron, BreastplateMythical,
+                                       HelmetBronze, HelmetIron, HelmetMythical};
         }
 
         private void LootInventoryImg_MouseDown(object sender, MouseButtonEventArgs e)
@@ -49,9 +53,9 @@ namespace WarCraftIII_WPF
         {
             if (sender is Image img)
             {
-                unit.AddInventory(img.Name);
-                img.Visibility = Visibility.Visible;
-                
+                var obj = imgs[MaxInventory.IndexOf(img.Name.Trim('0'))];
+                unit.AddInventory(obj.Name); 
+                obj.Visibility = Visibility.Visible; 
             }
         }
 

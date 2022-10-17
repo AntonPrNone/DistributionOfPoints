@@ -323,12 +323,12 @@ namespace WarCraftIII_Logic
 
         public void AddInventory(string loot)
         {
-            Inventory.Add(loot);
+            if (!Inventory.Contains(loot)) Inventory.Add(loot);
         }
 
         public void RemoveInventory(string loot)
         {
-            Inventory.Remove(loot);
+            if (Inventory.Contains(loot)) Inventory.Remove(loot);
         }
     }
 }
