@@ -16,6 +16,7 @@
     <None Remove="icon.png" />
     <None Remove="iconBack2.png" />
     <None Remove="icons8-warcraft-iii-100.png" />
+    <None Remove="img\arrows.png" />
     <None Remove="img\BG1.jpeg" />
     <None Remove="img\icoClose.png" />
     <None Remove="img\icoMinimize.png" />
@@ -24,6 +25,7 @@
     <None Remove="img\Rogue.png" />
     <None Remove="img\Warrior.png" />
     <None Remove="img\Wizard.png" />
+    <None Remove="img\arrows.png" />
     <None Remove="Warrior.png" />
   </ItemGroup>
 
@@ -42,6 +44,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="img\arrows.png" />
     <Resource Include="img\iconBack2.png" />
     <Resource Include="img\BG1.jpeg" />
     <Resource Include="img\icon.png" />

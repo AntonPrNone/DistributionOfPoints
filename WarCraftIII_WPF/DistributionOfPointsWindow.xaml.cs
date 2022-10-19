@@ -273,12 +273,6 @@ namespace WarCraftIII_WPF
             MongoExamples.SaveValues(unit.Name, unit);
         }
 
-        private void Image_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            new StartWindow().Show();
-            Close();
-        }
-
         private void ButtonBack_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
             ButtonBack.Source = new BitmapImage(new Uri("/img/iconBack2.png", UriKind.Relative));
@@ -302,6 +296,12 @@ namespace WarCraftIII_WPF
             ProgressEx.Foreground = (System.Windows.Media.Brush)Application.Current.Resources["ProgressBarColorGradient"];
             ProgressEx.Background = System.Windows.Media.Brushes.White;
             ExPlus_Label.Visibility = Visibility.Hidden;
+        }
+
+        private void ButtonBack_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            new StartWindow().Show();
+            Close();
         }
     }
 }

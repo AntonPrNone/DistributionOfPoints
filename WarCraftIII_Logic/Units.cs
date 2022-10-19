@@ -36,6 +36,7 @@ namespace WarCraftIII_Logic
         public int[] Intelligence { get; private set; }
 
         public List<string> Inventory { get; private set; }
+        public List<string> Body { get; private set; }
 
         public Unit(string name, int skillPoints, int skillPointsMax, int ex, int maxEx, double maxHP, double maxMP,
                     double pAttack, double mAttack, double pDef, int[] strength, int[] dexterity, int[] constitution,
@@ -330,5 +331,33 @@ namespace WarCraftIII_Logic
         {
             if (Inventory.Contains(loot)) Inventory.Remove(loot);
         }
+
+        public void ResetInventory()
+        {
+            Inventory.Clear();
+        }
+
+        // ---------------------------------------------------- *BODY* ----------------------------------------------------
+
+        public void AddBody(string loot)
+        {
+            Body.Add(loot);
+        }
+
+        public string RemoveBody(string loot)
+        {
+            foreach (var item in Body)
+            {
+                if (item.Contains(loot))
+                {
+                    Body.Remove(item);
+                    return item;
+                }
+            }
+            var x = Body[^1];
+            Body.Remove(x);
+            return x;
+        }
     }
 }
+ 

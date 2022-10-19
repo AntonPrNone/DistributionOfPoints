@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WarCraftIII_WPF"
         mc:Ignorable="d"
-        Title="Inventory. WarCraft |||" Height="450" Width="800" WindowStartupLocation="CenterScreen" Background="#FF131313"
+        Title="Inventory. WarCraft |||" Height="800" Width="800" WindowStartupLocation="CenterScreen" Background="#FF131313"
     xmlns:System="clr-namespace:System;assembly=System.Runtime" Closed="Window_Closed">
     <Window.Resources>
         <System:Double x:Key="GradientLegend">0.8</System:Double>
     </Window.Resources>
     <Grid>
-        <Grid x:Name="GridLoots" Margin="50,0,0,0" Background="#FF990000" Width="300" Height="300" HorizontalAlignment="Left" VerticalAlignment="Center">
+        <Grid x:Name="GridLoots" Margin="50,0,0,0" Width="300" Height="300" HorizontalAlignment="Left" VerticalAlignment="Center" Background="{DynamicResource DefoultColor}">
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
@@ -23,10 +23,10 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Border BorderThickness="2,2,2,2" BorderBrush="Black" CornerRadius="5,5,5,5" Grid.Row="0" Grid.Column="0">
-                <Image x:Name="Bow" Source="/img/loot/bow.png" MouseDown="LootInventoryImg_MouseDown" Visibility="Hidden"/>
+                <Image x:Name="Bow" Source="/img/loot/bow.png" Visibility="Hidden" Cursor="Hand" MouseRightButtonDown="Inventory_MouseRightButtonDown" MouseLeftButtonDown="Inventory_MouseLeftButtonDown"/>
             </Border>
             <Border BorderThickness="2,2,2,2" BorderBrush="Blue" CornerRadius="5,5,5,5" Grid.Row="0" Grid.Column="1">
-                <Image x:Name="Sword" Source="/img/loot/sword.png" MouseDown="LootInventoryImg_MouseDown" Visibility="Hidden"/>
+                <Image x:Name="Sword" Source="/img/loot/sword.png" Visibility="Hidden" Cursor="Hand" MouseLeftButtonDown="Inventory_MouseLeftButtonDown" MouseRightButtonDown="Inventory_MouseRightButtonDown"/>
             </Border>
             <Border BorderThickness="3,3,3,3" CornerRadius="5,5,5,5" Grid.Row="0" Grid.Column="2">
                 <Border.BorderBrush>
@@ -39,13 +39,13 @@
                         <GradientStop Color="Magenta" Offset="0.8"/>
                     </LinearGradientBrush>
                 </Border.BorderBrush>
-                <Image x:Name="MagicStaff" Source="/img/loot/magicStaff.png" MouseDown="LootInventoryImg_MouseDown" Visibility="Hidden"/>
+                <Image x:Name="MagicStaff" Source="/img/loot/magicStaff.png" Visibility="Hidden" Cursor="Hand" MouseLeftButtonDown="Inventory_MouseLeftButtonDown" MouseRightButtonDown="Inventory_MouseRightButtonDown"/>
             </Border>
             <Border BorderThickness="2,2,2,2" BorderBrush="Black" CornerRadius="5,5,5,5" Grid.Row="1" Grid.Column="0">
-                <Image x:Name="HelmetBronze" Source="/img/loot/helmetBronze.png" MouseDown="LootInventoryImg_MouseDown" Visibility="Hidden"/>
+                <Image x:Name="HelmetBronze" Source="/img/loot/helmetBronze.png" Visibility="Hidden" Cursor="Hand" MouseLeftButtonDown="Inventory_MouseLeftButtonDown" MouseRightButtonDown="Inventory_MouseRightButtonDown"/>
             </Border>
             <Border BorderThickness="2,2,2,2" BorderBrush="Blue" CornerRadius="5,5,5,5" Grid.Row="1" Grid.Column="1">
-                <Image x:Name="HelmetIron" Source="/img/loot/helmetIron.png" MouseDown="LootInventoryImg_MouseDown" Visibility="Hidden"/>
+                <Image x:Name="HelmetIron" Source="/img/loot/helmetIron.png" Visibility="Hidden" Cursor="Hand" MouseLeftButtonDown="Inventory_MouseLeftButtonDown" MouseRightButtonDown="Inventory_MouseRightButtonDown"/>
             </Border>
             <Border BorderThickness="3,3,3,3" CornerRadius="5,5,5,5" Grid.Row="1" Grid.Column="2">
                 <Border.BorderBrush>
@@ -58,13 +58,13 @@
                         <GradientStop Color="Magenta" Offset="0.8"/>
                     </LinearGradientBrush>
                 </Border.BorderBrush>
-                <Image x:Name="HelmetMythical" Source="/img/loot/helmetMythical.png" MouseDown="LootInventoryImg_MouseDown" Visibility="Hidden"/>
+                <Image x:Name="HelmetMythical" Source="/img/loot/helmetMythical.png" Visibility="Hidden" Cursor="Hand" MouseLeftButtonDown="Inventory_MouseLeftButtonDown" MouseRightButtonDown="Inventory_MouseRightButtonDown"/>
             </Border>
             <Border BorderThickness="2,2,2,2" BorderBrush="Black" CornerRadius="5,5,5,5" Grid.Row="2" Grid.Column="0">
-                <Image x:Name="BreastplateBronze" Source="/img/loot/breastplateBronze.png" MouseDown="LootInventoryImg_MouseDown" Visibility="Hidden"/>
+                <Image x:Name="BreastplateBronze" Source="/img/loot/breastplateBronze.png" Visibility="Hidden" Cursor="Hand" MouseLeftButtonDown="Inventory_MouseLeftButtonDown" MouseRightButtonDown="Inventory_MouseRightButtonDown"/>
             </Border>
             <Border BorderThickness="2,2,2,2" BorderBrush="Blue" CornerRadius="5,5,5,5" Grid.Row="2" Grid.Column="1">
-                <Image x:Name="BreastplateIron" Source="/img/loot/breastplateIron.png" MouseDown="LootInventoryImg_MouseDown" Visibility="Hidden"/>
+                <Image x:Name="BreastplateIron" Source="/img/loot/breastplateIron.png" Visibility="Hidden" Cursor="Hand" MouseLeftButtonDown="Inventory_MouseLeftButtonDown" MouseRightButtonDown="Inventory_MouseRightButtonDown"/>
             </Border>
             <Border BorderThickness="3,3,3,3" CornerRadius="5,5,5,5" Grid.Row="2" Grid.Column="2">
                 <Border.BorderBrush>
@@ -77,10 +77,10 @@
                         <GradientStop Color="Magenta" Offset="0.8"/>
                     </LinearGradientBrush>
                 </Border.BorderBrush>
-                <Image x:Name="BreastplateMythical" Source="/img/loot/breastplateMythical.png" Visibility="Hidden" MouseDown="LootInventoryImg_MouseDown"/>
+                <Image x:Name="BreastplateMythical" Source="/img/loot/breastplateMythical.png" Visibility="Hidden" Cursor="Hand" MouseLeftButtonDown="Inventory_MouseLeftButtonDown" MouseRightButtonDown="Inventory_MouseRightButtonDown"/>
             </Border>
         </Grid>
-        <Grid x:Name="GridLoots0" Margin="0,0,50,0" Background="#FF990000" Width="300" Height="300" HorizontalAlignment="Right" VerticalAlignment="Center">
+        <Grid x:Name="GridLoots0" Margin="0,0,50,0" Background="{DynamicResource DefoultColor}" Width="300" Height="300" HorizontalAlignment="Right" VerticalAlignment="Center">
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
@@ -92,10 +92,10 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Border BorderThickness="2,2,2,2" BorderBrush="Black" CornerRadius="5,5,5,5" Grid.Row="0" Grid.Column="0" Visibility="Visible">
-                <Image x:Name="Bow0" Source="/img/loot/bow.png" MouseDown="LootlandImg_MouseDown" Visibility="Visible"/>
+                <Image x:Name="Bow0" Source="/img/loot/bow.png" Visibility="Visible" Cursor="Hand" MouseLeftButtonDown="Land_MouseLeftButtonDown"/>
             </Border>
             <Border BorderThickness="2,2,2,2" BorderBrush="Blue" CornerRadius="5,5,5,5" Grid.Row="0" Grid.Column="1">
-                <Image x:Name="Sword0" Source="/img/loot/sword.png" MouseDown="LootlandImg_MouseDown" Visibility="Visible"/>
+                <Image x:Name="Sword0" Source="/img/loot/sword.png" Visibility="Visible" Cursor="Hand" MouseLeftButtonDown="Land_MouseLeftButtonDown"/>
             </Border>
             <Border BorderThickness="3,3,3,3" CornerRadius="5,5,5,5" Grid.Row="0" Grid.Column="2">
                 <Border.BorderBrush>
@@ -108,13 +108,13 @@
                         <GradientStop Color="Magenta" Offset="0.8"/>
                     </LinearGradientBrush>
                 </Border.BorderBrush>
-                <Image x:Name="MagicStaff0" Source="/img/loot/magicStaff.png" MouseDown="LootlandImg_MouseDown" Visibility="Visible"/>
+                <Image x:Name="MagicStaff0" Source="/img/loot/magicStaff.png" Visibility="Visible" Cursor="Hand" MouseLeftButtonDown="Land_MouseLeftButtonDown"/>
             </Border>
             <Border BorderThickness="2,2,2,2" BorderBrush="Black" CornerRadius="5,5,5,5" Grid.Row="1" Grid.Column="0">
-                <Image x:Name="HelmetBronze0" Source="/img/loot/helmetBronze.png" MouseDown="LootlandImg_MouseDown" Visibility="Visible"/>
+                <Image x:Name="HelmetBronze0" Source="/img/loot/helmetBronze.png" Visibility="Visible" Cursor="Hand" MouseLeftButtonDown="Land_MouseLeftButtonDown"/>
             </Border>
             <Border BorderThickness="2,2,2,2" BorderBrush="Blue" CornerRadius="5,5,5,5" Grid.Row="1" Grid.Column="1">
-                <Image x:Name="HelmetIron0" Source="/img/loot/helmetIron.png" MouseDown="LootlandImg_MouseDown" Visibility="Visible"/>
+                <Image x:Name="HelmetIron0" Source="/img/loot/helmetIron.png" Visibility="Visible" Cursor="Hand" MouseLeftButtonDown="Land_MouseLeftButtonDown"/>
             </Border>
             <Border BorderThickness="3,3,3,3" CornerRadius="5,5,5,5" Grid.Row="1" Grid.Column="2">
                 <Border.BorderBrush>
@@ -127,13 +127,13 @@
                         <GradientStop Color="Magenta" Offset="0.8"/>
                     </LinearGradientBrush>
                 </Border.BorderBrush>
-                <Image x:Name="HelmetMythical0" Source="/img/loot/helmetMythical.png" MouseDown="LootlandImg_MouseDown" Visibility="Visible"/>
+                <Image x:Name="HelmetMythical0" Source="/img/loot/helmetMythical.png" Visibility="Visible" Cursor="Hand" MouseLeftButtonDown="Land_MouseLeftButtonDown"/>
             </Border>
             <Border BorderThickness="2,2,2,2" BorderBrush="Black" CornerRadius="5,5,5,5" Grid.Row="2" Grid.Column="0">
-                <Image x:Name="BreastplateBronze0" Source="/img/loot/breastplateBronze.png" MouseDown="LootlandImg_MouseDown" Visibility="Visible"/>
+                <Image x:Name="BreastplateBronze0" Source="/img/loot/breastplateBronze.png" Visibility="Visible" Cursor="Hand" MouseLeftButtonDown="Land_MouseLeftButtonDown"/>
             </Border>
             <Border BorderThickness="2,2,2,2" BorderBrush="Blue" CornerRadius="5,5,5,5" Grid.Row="2" Grid.Column="1">
-                <Image x:Name="BreastplateIron0" Source="/img/loot/breastplateIron.png" MouseDown="LootlandImg_MouseDown" Visibility="Visible"/>
+                <Image x:Name="BreastplateIron0" Source="/img/loot/breastplateIron.png" Visibility="Visible" Cursor="Hand" MouseLeftButtonDown="Land_MouseLeftButtonDown"/>
             </Border>
             <Border BorderThickness="3,3,3,3" CornerRadius="5,5,5,5" Grid.Row="2" Grid.Column="2">
                 <Border.BorderBrush>
@@ -146,8 +146,47 @@
                         <GradientStop Color="Magenta" Offset="0.8"/>
                     </LinearGradientBrush>
                 </Border.BorderBrush>
-                <Image x:Name="BreastplateMythical0" Source="/img/loot/breastplateMythical.png" Visibility="Visible" MouseDown="LootlandImg_MouseDown"/>
+                <Image x:Name="BreastplateMythical0" Source="/img/loot/breastplateMythical.png" Visibility="Visible" Cursor="Hand" MouseLeftButtonDown="Land_MouseLeftButtonDown"/>
             </Border>
         </Grid>
+        <Image Margin="0,0,0,0" Stretch="Fill" Source="/img/arrows.png" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Center" VerticalAlignment="Center" Width="76" Height="75">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Grid Margin="0,20,0,0" VerticalAlignment="Top" HorizontalAlignment="Center">
+            <Image x:Name="UnitImg" Height="75" Margin="175,0,0,0" VerticalAlignment="Top" Width="75" Stretch="Fill" StretchDirection="Both" Source="/img/Warrior.png" MouseWheel="UnitImg_MouseWheel" HorizontalAlignment="Left"/>
+            <ComboBox x:Name="ComboBoxUnits" Margin="0,5,0,0" VerticalAlignment="Top" Width="160" IsEditable="True" SelectionChanged="ComboBoxUnits_SelectionChanged" FontFamily="MV Boli" FontSize="36" Background="White" HorizontalAlignment="Left" IsSynchronizedWithCurrentItem="False">
+                <ComboBoxItem Content="Warrior"/>
+                <ComboBoxItem Content="Rogue"/>
+                <ComboBoxItem Content="Wizard"/>
+            </ComboBox>
+        </Grid>
+        <Image x:Name="ButtonBack" Margin="0,20,20,0" Stretch="Fill" Source="/img/iconBack.png" Width="50" Height="50" HorizontalAlignment="Right" VerticalAlignment="Top" Cursor="Hand" MouseDown="ButtonBack_MouseDown" MouseEnter="ButtonBack_MouseEnter" MouseLeave="ButtonBack_MouseLeave"/>
+        <Label Content="Inventory" HorizontalAlignment="Left" Margin="136,180,0,0" VerticalAlignment="Top" Foreground="White" FontSize="24" FontFamily="Verdana"/>
+        <Label Content="Land" HorizontalAlignment="Right" Margin="0,180,166,0" VerticalAlignment="Top" Foreground="White" FontSize="24" FontFamily="Verdana" RenderTransformOrigin="0.558,0.052"/>
+        <Button x:Name="ResetButton" Content="Reset" HorizontalAlignment="Center" Margin="0,517,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="White" BorderBrush="Red" Height="24" Width="44" Cursor="Hand" Click="ResetButton_Click"/>
+        <Grid HorizontalAlignment="Center" Height="100" Margin="0,0,0,50" VerticalAlignment="Bottom" Width="300">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Border BorderThickness="2,2,2,2" BorderBrush="Lime" CornerRadius="5,5,5,5" Grid.Row="0" Grid.Column="0" Visibility="Visible">
+                <Image x:Name="Weapon" Source="/img/loot/sword.png" Visibility="Hidden" Cursor="Hand" MouseLeftButtonDown="Body_MouseLeftButtonDown"/>
+            </Border>
+            <Border BorderThickness="2,2,2,2" BorderBrush="Lime" CornerRadius="5,5,5,5" Grid.Row="0" Grid.Column="1">
+                <Image x:Name="Helmet" Source="/img/loot/helmetIron.png" Visibility="Hidden" Cursor="Hand" MouseLeftButtonDown="Body_MouseLeftButtonDown"/>
+            </Border>
+            <Border BorderThickness="2,2,2,2" BorderBrush="Lime" CornerRadius="5,5,5,5" Grid.Row="0" Grid.Column="2">
+                <Image x:Name="Breastplate" Source="/img/loot/breastplateIron.png" Visibility="Hidden" Cursor="Hand" MouseLeftButtonDown="Body_MouseLeftButtonDown"/>
+            </Border>
+        </Grid>
+        <Label Content="Body" HorizontalAlignment="Center" Margin="0,573,0,0" VerticalAlignment="Top" Foreground="White" FontSize="24" FontFamily="Verdana"/>
     </Grid>
 </Window>
