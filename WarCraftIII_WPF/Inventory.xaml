@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WarCraftIII_WPF"
         mc:Ignorable="d"
         Title="Inventory. WarCraft |||" Height="800" Width="800" WindowStartupLocation="CenterScreen" Background="#FF131313"
-    xmlns:System="clr-namespace:System;assembly=System.Runtime" Closed="Window_Closed">
+    xmlns:System="clr-namespace:System;assembly=System.Runtime" Closed="Window_Closed" Loaded="Window_Loaded">
     <Window.Resources>
         <System:Double x:Key="GradientLegend">0.8</System:Double>
     </Window.Resources>

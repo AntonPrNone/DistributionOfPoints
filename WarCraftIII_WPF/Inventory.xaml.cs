@@ -19,44 +19,83 @@ namespace WarCraftIII_WPF
         private Unit rogue = MongoExamples.Find("Rogue");
         private Unit wizard = MongoExamples.Find("Wizard");
         private List<string> MaxInventory = MongoExamples.FindMaxInventory();
-        private List<Image> imgs;
+        private List<Image> imgsInventory;
         private bool mouseScrolled = false;
 
         public Inventory()
         {
             InitializeComponent();
+            UpdateData();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
             units = new Unit[] { warrior, rogue, wizard };
             unit = warrior;
             ComboBoxUnits.SelectedIndex = 0;
-
-            UpdateData();
-
-            imgs = new List<Image>() { Sword, Bow, MagicStaff, BreastplateBronze, BreastplateIron, BreastplateMythical,
+            imgsInventory = new List<Image>() { Sword, Bow, MagicStaff, BreastplateBronze, BreastplateIron, BreastplateMythical,
                                        HelmetBronze, HelmetIron, HelmetMythical};
         }
 
-        private void Inventory_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void UpdateData()
         {
-            if (sender is Image img)
+            foreach (Image imgInventory in imgsInventory) // Inventory
             {
-                unit.RemoveInventory(img.Name);
-                img.Visibility = Visibility.Hidden;
+                if (unit.Inventory.Contains(imgInventory.Name)) imgInventory.Visibility = Visibility.Visible;
+            }
+
+            foreach (var item in unit.Body) // Body
+            {
+                if (item.Contains("Helmet"))
+                {
+                    Helmet.Source = new BitmapImage(new Uri($"/img/loot/{item}.png", UriKind.Relative));
+                    Helmet.Visibility = Visibility.Visible;
+                }
+
+                else if (item.Contains("Breastplate"))
+                {
+                    Breastplate.Source = new BitmapImage(new Uri($"/img/loot/{item}.png", UriKind.Relative));
+                    Breastplate.Visibility = Visibility.Visible;
+                }
+
+                else
+                {
+                    Weapon.Source = new BitmapImage(new Uri($"/img/loot/{item}.png", UriKind.Relative));
+                    Weapon.Visibility = Visibility.Visible;
+                }
             }
         }
 
-        private void Land_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            if (sender is Image img)
-            {
-                var obj = imgs[MaxInventory.IndexOf(img.Name.Trim('0'))];
-                unit.AddInventory(obj.Name); 
-                obj.Visibility = Visibility.Visible; 
-            }
-        }
+        // ----------------------------------------------- СhangingСharacters ----------------------------------------------
 
-        private void Window_Closed(object sender, EventArgs e)
+        private void SwitchingUnits(Unit unit)
         {
-            MongoExamples.SaveValues(unit.Name, unit);
+            MongoExamples.SaveValues(this.unit.Name, this.unit);
+            this.unit = unit;
+
+            if (unit.Name == "Warrior")
+            {
+                UnitImg.Source = new BitmapImage(new Uri("/img/Warrior.png", UriKind.Relative));
+                Application.Current.Resources["DefoultColor"] = Application.Current.Resources["WarriorColor"];
+            }
+
+            if (unit.Name == "Rogue")
+            {
+                UnitImg.Source = new BitmapImage(new Uri("/img/Rogue.png", UriKind.Relative));
+                Application.Current.Resources["DefoultColor"] = Application.Current.Resources["RogueColor"];
+            }
+
+            if (unit.Name == "Wizard")
+            {
+                UnitImg.Source = new BitmapImage(new Uri("/img/Wizard.png", UriKind.Relative));
+                Application.Current.Resources["DefoultColor"] = Application.Current.Resources["WizardColor"];
+            }
+
+            foreach (Image item in imgsInventory) item.Visibility = Visibility.Hidden;
+            Helmet.Visibility = Visibility.Hidden;
+            Breastplate.Visibility = Visibility.Hidden;
+            Weapon.Visibility = Visibility.Hidden;
+            UpdateData();
         }
 
         private void ComboBoxUnits_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -125,89 +164,15 @@ namespace WarCraftIII_WPF
             }
         }
 
-        private void SwitchingUnits(Unit unit) // Changing a character
-        {
-            MongoExamples.SaveValues(this.unit.Name, this.unit);
-            this.unit = unit;
+        // --------------------------------------------- Inventory. Body. Land ---------------------------------------------
 
-            if (unit.Name == "Warrior")
+        private void Inventory_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is Image img)
             {
-                UnitImg.Source = new BitmapImage(new Uri("/img/Warrior.png", UriKind.Relative));
-                Application.Current.Resources["DefoultColor"] = Application.Current.Resources["WarriorColor"];
+                unit.RemoveInventory(img.Name);
+                img.Visibility = Visibility.Hidden;
             }
-
-            if (unit.Name == "Rogue")
-            {
-                UnitImg.Source = new BitmapImage(new Uri("/img/Rogue.png", UriKind.Relative));
-                Application.Current.Resources["DefoultColor"] = Application.Current.Resources["RogueColor"];
-            }
-
-            if (unit.Name == "Wizard")
-            {
-                UnitImg.Source = new BitmapImage(new Uri("/img/Wizard.png", UriKind.Relative));
-                Application.Current.Resources["DefoultColor"] = Application.Current.Resources["WizardColor"];
-            }
-
-            foreach (Image item in imgs) item.Visibility = Visibility.Hidden;
-            Helmet.Visibility = Visibility.Hidden;
-            Breastplate.Visibility = Visibility.Hidden;
-            Weapon.Visibility = Visibility.Hidden;
-            UpdateData();
-        }
-
-        private void UpdateData()
-        {
-            if (unit.Inventory.Contains("Bow")) Bow.Visibility = Visibility.Visible;
-            if (unit.Inventory.Contains("Sword")) Sword.Visibility = Visibility.Visible;
-            if (unit.Inventory.Contains("MagicStaff")) MagicStaff.Visibility = Visibility.Visible;
-            if (unit.Inventory.Contains("HelmetBronze")) HelmetBronze.Visibility = Visibility.Visible;
-            if (unit.Inventory.Contains("HelmetIron")) HelmetIron.Visibility = Visibility.Visible;
-            if (unit.Inventory.Contains("HelmetMythical")) HelmetMythical.Visibility = Visibility.Visible;
-            if (unit.Inventory.Contains("BreastplateBronze")) BreastplateBronze.Visibility = Visibility.Visible;
-            if (unit.Inventory.Contains("BreastplateIron")) BreastplateIron.Visibility = Visibility.Visible;
-            if (unit.Inventory.Contains("BreastplateMythical")) BreastplateMythical.Visibility = Visibility.Visible;
-            foreach (var item in unit.Body)
-            {
-                if (item.Contains("Helmet"))
-                {
-                    Helmet.Source = new BitmapImage(new Uri($"/img/loot/{item}.png", UriKind.Relative));
-                    Helmet.Visibility = Visibility.Visible;
-                }
-
-                else if (item.Contains("Breastplate"))
-                {
-                    Breastplate.Source = new BitmapImage(new Uri($"/img/loot/{item}.png", UriKind.Relative));
-                    Breastplate.Visibility = Visibility.Visible;
-                }
-
-                else
-                {
-                    Weapon.Source = new BitmapImage(new Uri($"/img/loot/{item}.png", UriKind.Relative));
-                    Weapon.Visibility = Visibility.Visible;
-                }
-            }
-        }
-
-        private void ButtonBack_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            new StartWindow().Show();
-            Close();
-        }
-
-        private void ButtonBack_MouseEnter(object sender, MouseEventArgs e)
-        {
-            ButtonBack.Source = new BitmapImage(new Uri("/img/iconBack2.png", UriKind.Relative));
-        }
-
-        private void ButtonBack_MouseLeave(object sender, MouseEventArgs e)
-        {
-            ButtonBack.Source = new BitmapImage(new Uri("/img/iconBack.png", UriKind.Relative));
-        }
-
-        private void ResetButton_Click(object sender, RoutedEventArgs e)
-        {
-            unit.ResetInventory();
-            foreach (Image item in imgs) item.Visibility = Visibility.Hidden;
         }
 
         private void Inventory_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
@@ -245,17 +210,62 @@ namespace WarCraftIII_WPF
             if (sender is Image img)
             {
                 var nameLoot = unit.RemoveBody(img.Name);
-                foreach (var item in imgs)
+                img.Visibility = Visibility.Hidden;
+                foreach (var item in imgsInventory)
                 {
                     if (item.Name == nameLoot)
                     {
                         item.Visibility = Visibility.Visible;
-                        img.Visibility = Visibility.Hidden;
-                        unit.AddInventory(item.Name);
                         break;
                     }
                 }
             }
+        }
+
+        private void Land_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is Image img)
+            {
+                var obj = imgsInventory[MaxInventory.IndexOf(img.Name.Trim('0'))];
+                unit.AddInventory(obj.Name); 
+                obj.Visibility = Visibility.Visible; 
+            }
+        }
+
+        // -----------------------------------------------------------------------------------------------------------------
+
+        private void ResetButton_Click(object sender, RoutedEventArgs e)
+        {
+            unit.ResetInventory();
+            foreach (Image item in imgsInventory) item.Visibility = Visibility.Hidden;
+            Helmet.Visibility = Visibility.Hidden;
+            Breastplate.Visibility = Visibility.Hidden;
+            Weapon.Visibility = Visibility.Hidden;
+        }
+
+        // ---------------------------------------------------- *ButtonBack* -----------------------------------------------
+
+        private void ButtonBack_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            new StartWindow().Show();
+            Close();
+        }
+
+        private void ButtonBack_MouseEnter(object sender, MouseEventArgs e)
+        {
+            ButtonBack.Source = new BitmapImage(new Uri("/img/iconBack2.png", UriKind.Relative));
+        }
+
+        private void ButtonBack_MouseLeave(object sender, MouseEventArgs e)
+        {
+            ButtonBack.Source = new BitmapImage(new Uri("/img/iconBack.png", UriKind.Relative));
+        }
+
+        // -----------------------------------------------------------------------------------------------------------------
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            MongoExamples.SaveValues(unit.Name, unit);
         }
     }
 }

@@ -89,7 +89,7 @@ namespace WarCraftIII_WPF
             return true;
         }
 
-        // -------------------------------------- MANAGING CHARACTERISTICS --------------------------------------
+        // -------------------------------------------- MANAGING CHARACTERISTICS -------------------------------------------
 
         private void AddStrength_Button_Click(object sender, RoutedEventArgs e)
         {
@@ -147,32 +147,33 @@ namespace WarCraftIII_WPF
             UpdateData();
         }
 
-        // ------------------------------------------------------------------------------------------------------
+        // ----------------------------------------------- СhangingСharacters ----------------------------------------------
 
-        private void ResetButton_Click(object sender, RoutedEventArgs e) // Reset characteristics
+        private void SwitchingUnits(Unit unit) // Changing a character
         {
-            MongoExamples.ResetValues(unit.Name);
-            unit = MongoExamples.Find(unit.Name);
+            MongoExamples.SaveValues(this.unit.Name, this.unit);
+            this.unit = unit;
 
-            for (int un = 0; un < units.Length; un++)
+            if (unit.Name == "Warrior")
             {
-                if (units[un].Name == unit.Name) units[un] = unit;
+                UnitImg.Source = new BitmapImage(new Uri("/img/Warrior.png", UriKind.Relative));
+                Application.Current.Resources["DefoultColor"] = Application.Current.Resources["WarriorColor"];
+            }
+
+            if (unit.Name == "Rogue")
+            {
+                UnitImg.Source = new BitmapImage(new Uri("/img/Rogue.png", UriKind.Relative));
+                Application.Current.Resources["DefoultColor"] = Application.Current.Resources["RogueColor"];
+            }
+
+            if (unit.Name == "Wizard")
+            {
+                UnitImg.Source = new BitmapImage(new Uri("/img/Wizard.png", UriKind.Relative));
+                Application.Current.Resources["DefoultColor"] = Application.Current.Resources["WizardColor"];
             }
 
             UpdateData();
             ResetColorButtons();
-        }
-
-        private void ResetColorButtons() // reset button colors
-        {
-            AddConstitution_Button.Foreground = System.Windows.Media.Brushes.White;
-            AddDexterity_Button.Foreground = System.Windows.Media.Brushes.White;
-            AddStrength_Button.Foreground = System.Windows.Media.Brushes.White;
-            AddIntelligence_Button.Foreground = System.Windows.Media.Brushes.White;
-            ReduceConstitution_Button.Foreground = System.Windows.Media.Brushes.White;
-            ReduceDexterity_Button.Foreground = System.Windows.Media.Brushes.White;
-            ReduceStrength_Button.Foreground = System.Windows.Media.Brushes.White;
-            ReduceIntelligence_Button.Foreground = System.Windows.Media.Brushes.White;
         }
 
         private void ComboBoxUnits_SelectionChanged(object sender, SelectionChangedEventArgs e) // Changing a character with ComboBox
@@ -241,36 +242,12 @@ namespace WarCraftIII_WPF
             }
         }
 
-        private void SwitchingUnits(Unit unit) // Changing a character
+        // ------------------------------------------------------ Anim -----------------------------------------------------
+
+        private void ButtonBack_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            MongoExamples.SaveValues(this.unit.Name, this.unit);
-            this.unit = unit;
-
-            if (unit.Name == "Warrior")
-            {
-                UnitImg.Source = new BitmapImage(new Uri("/img/Warrior.png", UriKind.Relative));
-                Application.Current.Resources["DefoultColor"] = Application.Current.Resources["WarriorColor"];
-            }
-
-            if (unit.Name == "Rogue")
-            {
-                UnitImg.Source = new BitmapImage(new Uri("/img/Rogue.png", UriKind.Relative));
-                Application.Current.Resources["DefoultColor"] = Application.Current.Resources["RogueColor"];
-            }
-
-            if (unit.Name == "Wizard")
-            {
-                UnitImg.Source = new BitmapImage(new Uri("/img/Wizard.png", UriKind.Relative));
-                Application.Current.Resources["DefoultColor"] = Application.Current.Resources["WizardColor"];
-            }
-
-            UpdateData();
-            ResetColorButtons();
-        }
-
-        private void Window_Closed(object sender, EventArgs e)
-        {
-            MongoExamples.SaveValues(unit.Name, unit);
+            new StartWindow().Show();
+            Close();
         }
 
         private void ButtonBack_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
@@ -298,10 +275,37 @@ namespace WarCraftIII_WPF
             ExPlus_Label.Visibility = Visibility.Hidden;
         }
 
-        private void ButtonBack_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        // -----------------------------------------------------------------------------------------------------------------
+
+        private void ResetButton_Click(object sender, RoutedEventArgs e) // Reset characteristics
         {
-            new StartWindow().Show();
-            Close();
+            MongoExamples.ResetValues(unit.Name);
+            unit = MongoExamples.Find(unit.Name);
+
+            for (int un = 0; un < units.Length; un++)
+            {
+                if (units[un].Name == unit.Name) units[un] = unit;
+            }
+
+            UpdateData();
+            ResetColorButtons();
+        }
+
+        private void ResetColorButtons() // Reset button colors
+        {
+            AddConstitution_Button.Foreground = System.Windows.Media.Brushes.White;
+            AddDexterity_Button.Foreground = System.Windows.Media.Brushes.White;
+            AddStrength_Button.Foreground = System.Windows.Media.Brushes.White;
+            AddIntelligence_Button.Foreground = System.Windows.Media.Brushes.White;
+            ReduceConstitution_Button.Foreground = System.Windows.Media.Brushes.White;
+            ReduceDexterity_Button.Foreground = System.Windows.Media.Brushes.White;
+            ReduceStrength_Button.Foreground = System.Windows.Media.Brushes.White;
+            ReduceIntelligence_Button.Foreground = System.Windows.Media.Brushes.White;
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            MongoExamples.SaveValues(unit.Name, unit);
         }
     }
 }
