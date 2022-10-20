@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -25,16 +26,16 @@ namespace WarCraftIII_WPF
         public Inventory()
         {
             InitializeComponent();
+            unit = warrior;
+            imgsInventory = new List<Image>() { Sword, Bow, MagicStaff, BreastplateBronze, BreastplateIron, BreastplateMythical,
+                                       HelmetBronze, HelmetIron, HelmetMythical};
             UpdateData();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             units = new Unit[] { warrior, rogue, wizard };
-            unit = warrior;
             ComboBoxUnits.SelectedIndex = 0;
-            imgsInventory = new List<Image>() { Sword, Bow, MagicStaff, BreastplateBronze, BreastplateIron, BreastplateMythical,
-                                       HelmetBronze, HelmetIron, HelmetMythical};
         }
 
         private void UpdateData()
@@ -226,21 +227,15 @@ namespace WarCraftIII_WPF
         {
             if (sender is Image img)
             {
-                var obj = imgsInventory[MaxInventory.IndexOf(img.Name.Trim('0'))];
+                Image obj = imgsInventory[MaxInventory.IndexOf(img.Name.Trim('0'))];
                 unit.AddInventory(obj.Name); 
                 obj.Visibility = Visibility.Visible; 
             }
         }
 
-        // -----------------------------------------------------------------------------------------------------------------
-
-        private void ResetButton_Click(object sender, RoutedEventArgs e)
+        private void Land_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
-            unit.ResetInventory();
-            foreach (Image item in imgsInventory) item.Visibility = Visibility.Hidden;
-            Helmet.Visibility = Visibility.Hidden;
-            Breastplate.Visibility = Visibility.Hidden;
-            Weapon.Visibility = Visibility.Hidden;
+            DisplayingInformation((Image)sender);
         }
 
         // ---------------------------------------------------- *ButtonBack* -----------------------------------------------
@@ -263,9 +258,79 @@ namespace WarCraftIII_WPF
 
         // -----------------------------------------------------------------------------------------------------------------
 
+        private void ResetButton_Click(object sender, RoutedEventArgs e)
+        {
+            unit.ResetInventory();
+            unit.ResetBody();
+            foreach (Image item in imgsInventory) item.Visibility = Visibility.Hidden;
+            Helmet.Visibility = Visibility.Hidden;
+            Breastplate.Visibility = Visibility.Hidden;
+            Weapon.Visibility = Visibility.Hidden;
+        }
+
         private void Window_Closed(object sender, EventArgs e)
         {
             MongoExamples.SaveValues(unit.Name, unit);
+        }
+
+        private async void DisplayingInformation(Image x)
+        {
+            switch (x.Name)
+            {
+                case "Bow0":
+                    InfoTextBox0_0.Visibility = Visibility.Visible;
+                    await Task.Delay(2000);
+                    InfoTextBox0_0.Visibility = Visibility.Hidden;
+                    break;
+
+                case "Sword0":
+                    InfoTextBox0_1.Visibility = Visibility.Visible;
+                    await Task.Delay(2000);
+                    InfoTextBox0_1.Visibility = Visibility.Hidden;
+                    break;
+
+                case "MagicStaff0":
+                    InfoTextBox0_2.Visibility = Visibility.Visible;
+                    await Task.Delay(2000);
+                    InfoTextBox0_2.Visibility = Visibility.Hidden;
+                    break;
+
+                case "HelmetBronze0":
+                    InfoTextBox1_0.Visibility = Visibility.Visible;
+                    await Task.Delay(2000);
+                    InfoTextBox1_0.Visibility = Visibility.Hidden;
+                    break;
+
+                case "HelmetIron0":
+                    InfoTextBox1_1.Visibility = Visibility.Visible;
+                    await Task.Delay(2000);
+                    InfoTextBox1_1.Visibility = Visibility.Hidden;
+                    break;
+
+                case "HelmetMythical0":
+                    InfoTextBox1_2.Visibility = Visibility.Visible;
+                    await Task.Delay(2000);
+                    InfoTextBox1_2.Visibility = Visibility.Hidden;
+                    break;
+
+                case "BreastplateBronze0":
+                    InfoTextBox2_0.Visibility = Visibility.Visible;
+                    await Task.Delay(2000);
+                    InfoTextBox2_0.Visibility = Visibility.Hidden;
+                    break;
+
+                case "BreastplateIron0":
+                    InfoTextBox2_1.Visibility = Visibility.Visible;
+                    await Task.Delay(2000);
+                    InfoTextBox2_1.Visibility = Visibility.Hidden;
+                    break;
+
+                case "BreastplateMythical0":
+                    InfoTextBox2_2.Visibility = Visibility.Visible;
+                    await Task.Delay(2000);
+                    InfoTextBox2_2.Visibility = Visibility.Hidden;
+                    break;
+            }
         }
     }
 }

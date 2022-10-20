@@ -280,7 +280,12 @@ namespace WarCraftIII_WPF
         private void ResetButton_Click(object sender, RoutedEventArgs e) // Reset characteristics
         {
             MongoExamples.ResetValues(unit.Name);
+            var inv = unit.Inventory;
+            var body = unit.Body;
             unit = MongoExamples.Find(unit.Name);
+            unit.EditInventory(inv);
+            unit.EditBody(body);
+            unit.RecoverBody();
 
             for (int un = 0; un < units.Length; un++)
             {
@@ -306,6 +311,11 @@ namespace WarCraftIII_WPF
         private void Window_Closed(object sender, EventArgs e)
         {
             MongoExamples.SaveValues(unit.Name, unit);
+        }
+
+        private void UpdateData0(object sender, RoutedEventArgs e)
+        {
+            UpdateData();
         }
     }
 }

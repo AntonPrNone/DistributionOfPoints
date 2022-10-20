@@ -337,30 +337,243 @@ namespace WarCraftIII_Logic
             Inventory.Clear();
         }
 
+        public void EditInventory(List<string> inv)
+        {
+            Inventory = inv;
+        }
+
         // ----------------------------------------------------- *BODY* ----------------------------------------------------
 
         public void AddBody(string loot)
         {
             Body.Add(loot);
+            DistributionBuff(loot, '+');
         }
 
         public string RemoveBody(string loot)
         {
-            foreach (var item in Body)
+            foreach (string item in Body)
             {
                 if (item.Contains(loot))
                 {
                     Body.Remove(item);
                     AddInventory(item);
+                    DistributionBuff(item, '-');
                     return item;
                 }
             }
 
-            var x = Body[^1];
+            string x = Body[^1];
             Body.Remove(x);
             AddInventory(x);
+            DistributionBuff(x, '-');
             return x;
+        }
+
+        public void ResetBody()
+        {
+            foreach (string item in Body) DistributionBuff(item, '-');
+            Body.Clear();
+        }
+
+        public void RecoverBody()
+        {
+            foreach (string item in Body) DistributionBuff(item, '+');
+        }
+
+        public void EditBody(List<string> body)
+        {
+            Body = body;
+        }
+
+        // ----------------------------------------------- ^BUFF^ / ʌDEBUFFʌ -----------------------------------------------
+
+        public void DistributionBuff(string loot, char sign)
+        {
+            switch (loot)
+            {
+                case "Bow":
+                    BuffDebuffBow(sign);
+                    break;
+
+                case "Sword":
+                    BuffDebuffSword(sign);
+                    break;
+
+                case "MagicStaff":
+                    BuffDebuffMagicStaff(sign);
+                    break;
+
+                case "HelmetBronze":
+                    BuffDebuffHelmetBronze(sign);
+                    break;
+
+                case "HelmetIron":
+                    BuffDebuffHelmetIron(sign);
+                    break;
+
+                case "HelmetMythical":
+                    BuffDebuffHelmetMythical(sign);
+                    break;
+
+                case "BreastplateBronze":
+                    BuffDebuffBreastplateBronze(sign);
+                    break;
+
+                case "BreastplateIron":
+                    BuffDebuffBreastplateIron(sign);
+                    break;
+
+                case "BreastplateMythical":
+                    BuffDebuffBreastplateMythical(sign);
+                    break;
+
+            }
+        }
+
+        public void BuffDebuffBow(char sign)
+        {
+            if (sign == '+')
+            {
+                PAttack += 20;
+                PDef += 10;
+            }
+
+            else if (sign == '-')
+            {
+                PAttack -= 20;
+                PDef -= 10;
+            }
+        }
+
+        public void BuffDebuffSword(char sign)
+        {
+            if (sign == '+')
+            {
+                PAttack += 50;
+            }
+
+            else if (sign == '-')
+            {
+                PAttack -= 50;
+            }
+        }
+
+        public void BuffDebuffMagicStaff(char sign)
+        {
+            if (sign == '+')
+            {
+                PAttack += 15;
+                MAttack += 50;
+                MaxMP += 10;
+                PDef += 20;
+            }
+
+            else if (sign == '-')
+            {
+                PAttack -= 15;
+                MAttack -= 50;
+                MaxMP -= 10;
+                PDef -= 20;
+            }
+        }
+
+        public void BuffDebuffHelmetBronze(char sign)
+        {
+            if (sign == '+')
+            {
+                PDef += 20;
+                MaxHP += 50;
+            }
+
+            else if (sign == '-')
+            {
+                PDef -= 20;
+                MaxHP -= 50;
+            }
+        }
+
+        public void BuffDebuffHelmetIron(char sign)
+        {
+            if (sign == '+')
+            {
+                PDef += 50;
+                MaxHP += 75;
+            }
+
+            else if (sign == '-')
+            {
+                PDef -= 50;
+                MaxHP -= 75;
+            }
+        }
+
+        public void BuffDebuffHelmetMythical(char sign)
+        {
+            if (sign == '+')
+            {
+                PDef += 100;
+                MaxHP += 100;
+                MaxMP += 50;
+                MAttack += 10;
+            }
+
+            else if (sign == '-')
+            {
+                PDef -= 100;
+                MaxHP -= 100;
+                MaxMP -= 50;
+                MAttack -= 10;
+            }
+        }
+
+        public void BuffDebuffBreastplateBronze(char sign)
+        {
+            if (sign == '+')
+            {
+                PDef += 50;
+                MaxHP += 100;
+            }
+
+            else if (sign == '-')
+            {
+                PDef -= 50;
+                MaxHP -= 100;
+            }
+        }
+
+        public void BuffDebuffBreastplateIron(char sign)
+        {
+            if (sign == '+')
+            {
+                PDef += 100;
+                MaxHP += 150;
+            }
+
+            else if (sign == '-')
+            {
+                PDef -= 100;
+                MaxHP -= 150;
+            }
+        }
+
+        public void BuffDebuffBreastplateMythical(char sign)
+        {
+            if (sign == '+')
+            {
+                PDef += 200;
+                MaxHP += 200;
+                MaxMP += 75;
+                MAttack += 20;
+            }
+
+            else if (sign == '-')
+            {
+                PDef -= 200;
+                MaxHP -= 200;
+                MaxMP -= 75;
+                MAttack -= 20;
+            }
         }
     }
 }
- 
