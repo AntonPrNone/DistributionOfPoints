@@ -132,6 +132,7 @@ namespace WarCraftIII_WPF
                 From = 0,
                 To = -385,
                 Duration = TimeSpan.FromMilliseconds(500),
+                EasingFunction = new QuadraticEase()
             };
 
 
