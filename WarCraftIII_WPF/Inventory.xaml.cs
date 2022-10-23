@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using WarCraftIII_Logic;
 
@@ -27,7 +29,7 @@ namespace WarCraftIII_WPF
         {
             InitializeComponent();
             unit = warrior;
-            imgsInventory = new List<Image>() { Sword, Bow, MagicStaff, BreastplateBronze, BreastplateIron, BreastplateMythical,
+            imgsInventory = new List<Image>() { WeaponSword, WeaponBow, WeaponMagicStaff, BreastplateBronze, BreastplateIron, BreastplateMythical,
                                        HelmetBronze, HelmetIron, HelmetMythical};
             UpdateData();
         }
@@ -45,7 +47,7 @@ namespace WarCraftIII_WPF
                 if (unit.Inventory.Contains(imgInventory.Name)) imgInventory.Visibility = Visibility.Visible;
             }
 
-            foreach (var item in unit.Body) // Body
+            foreach (string item in unit.Body) // Body
             {
                 if (item.Contains("Helmet"))
                 {
@@ -59,7 +61,7 @@ namespace WarCraftIII_WPF
                     Breastplate.Visibility = Visibility.Visible;
                 }
 
-                else
+                else if (item.Contains("Weapon"))
                 {
                     Weapon.Source = new BitmapImage(new Uri($"/img/loot/{item}.png", UriKind.Relative));
                     Weapon.Visibility = Visibility.Visible;
@@ -69,7 +71,7 @@ namespace WarCraftIII_WPF
 
         // ----------------------------------------------- СhangingСharacters ----------------------------------------------
 
-        private void SwitchingUnits(Unit unit)
+        private void SwitchingUnits(Unit unit) // Changing a character
         {
             MongoExamples.SaveValues(this.unit.Name, this.unit);
             this.unit = unit;
@@ -99,7 +101,7 @@ namespace WarCraftIII_WPF
             UpdateData();
         }
 
-        private void ComboBoxUnits_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ComboBoxUnits_SelectionChanged(object sender, SelectionChangedEventArgs e) // Changing a character with ComboBox
         {
             if (!mouseScrolled)
             {
@@ -120,7 +122,7 @@ namespace WarCraftIII_WPF
             }
         }
 
-        private void UnitImg_MouseWheel(object sender, MouseWheelEventArgs e)
+        private void UnitImg_MouseWheel(object sender, MouseWheelEventArgs e) // Changing a character with Scroll
         {
             if (e.Delta > 0)
             {
@@ -186,6 +188,7 @@ namespace WarCraftIII_WPF
                     Breastplate.Visibility = Visibility.Visible;
                     img.Visibility = Visibility.Hidden;
                     unit.AddBody(img.Name);
+                    unit.RemoveInventory(img.Name);
                 }
 
                 else if (Helmet.Visibility == Visibility.Hidden && img.Name.Contains(Helmet.Name))
@@ -194,14 +197,16 @@ namespace WarCraftIII_WPF
                     Helmet.Visibility = Visibility.Visible;
                     img.Visibility = Visibility.Hidden;
                     unit.AddBody(img.Name);
+                    unit.RemoveInventory(img.Name);
                 }
 
-                else if (Weapon.Visibility == Visibility.Hidden)
+                else if (Weapon.Visibility == Visibility.Hidden && img.Name.Contains(Weapon.Name))
                 {
                     Weapon.Source = img.Source;
                     Weapon.Visibility = Visibility.Visible;
                     img.Visibility = Visibility.Hidden;
                     unit.AddBody(img.Name);
+                    unit.RemoveInventory(img.Name);
                 }
             }
         }
@@ -210,9 +215,9 @@ namespace WarCraftIII_WPF
         {
             if (sender is Image img)
             {
-                var nameLoot = unit.RemoveBody(img.Name);
+                string nameLoot = unit.RemoveBody(img.Name);
                 img.Visibility = Visibility.Hidden;
-                foreach (var item in imgsInventory)
+                foreach (Image item in imgsInventory)
                 {
                     if (item.Name == nameLoot)
                     {
@@ -220,6 +225,7 @@ namespace WarCraftIII_WPF
                         break;
                     }
                 }
+                Anim.AnimFlashingLabel(InventoryLabel, unit);
             }
         }
 
@@ -228,8 +234,11 @@ namespace WarCraftIII_WPF
             if (sender is Image img)
             {
                 Image obj = imgsInventory[MaxInventory.IndexOf(img.Name.Trim('0'))];
-                unit.AddInventory(obj.Name); 
-                obj.Visibility = Visibility.Visible; 
+                if (unit.AddInventory(obj.Name))
+                {
+                    Anim.AnimElementMove((Image)sender, obj);
+                    Anim.AnimFlashingLabel(InventoryLabel, unit);
+                }
             }
         }
 
@@ -249,11 +258,70 @@ namespace WarCraftIII_WPF
         private void ButtonBack_MouseEnter(object sender, MouseEventArgs e)
         {
             ButtonBack.Source = new BitmapImage(new Uri("/img/iconBack2.png", UriKind.Relative));
+            Anim.AnimElementSize_MouseEnter((Image)sender);
         }
 
         private void ButtonBack_MouseLeave(object sender, MouseEventArgs e)
         {
             ButtonBack.Source = new BitmapImage(new Uri("/img/iconBack.png", UriKind.Relative));
+            Anim.AnimElementSize_MouseLeave((Image)sender);
+        }
+
+        // ------------------------------------------------------ Anim -----------------------------------------------------
+
+        private void DisplayingInformation(Image x) // Information about the subject
+        {
+            switch (x.Name)
+            {
+                case "WeaponBow0":
+                    Anim.AnimElementVisibility(InfoTextBox0_0);
+                    break;
+
+                case "WeaponSword0":
+                    Anim.AnimElementVisibility(InfoTextBox0_1);
+                    break;
+
+                case "WeaponMagicStaff0":
+                    Anim.AnimElementVisibility(InfoTextBox0_2);
+                    break;
+
+                case "HelmetBronze0":
+                    Anim.AnimElementVisibility(InfoTextBox1_0);
+                    break;
+
+                case "HelmetIron0":
+                    Anim.AnimElementVisibility(InfoTextBox1_1);
+                    break;
+
+                case "HelmetMythical0":
+                    Anim.AnimElementVisibility(InfoTextBox1_2);
+                    break;
+
+                case "BreastplateBronze0":
+                    Anim.AnimElementVisibility(InfoTextBox2_0);
+                    break;
+
+                case "BreastplateIron0":
+                    Anim.AnimElementVisibility(InfoTextBox2_1);
+                    break;
+
+                case "BreastplateMythical0":
+                    Anim.AnimElementVisibility(InfoTextBox2_2);
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        private void AnimButton_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Anim.AnimElementSize_MouseEnter((Button)sender);
+        }
+
+        private void AnimButton_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Anim.AnimElementSize_MouseLeave((Button)sender);
         }
 
         // -----------------------------------------------------------------------------------------------------------------
@@ -271,66 +339,6 @@ namespace WarCraftIII_WPF
         private void Window_Closed(object sender, EventArgs e)
         {
             MongoExamples.SaveValues(unit.Name, unit);
-        }
-
-        private async void DisplayingInformation(Image x)
-        {
-            switch (x.Name)
-            {
-                case "Bow0":
-                    InfoTextBox0_0.Visibility = Visibility.Visible;
-                    await Task.Delay(2000);
-                    InfoTextBox0_0.Visibility = Visibility.Hidden;
-                    break;
-
-                case "Sword0":
-                    InfoTextBox0_1.Visibility = Visibility.Visible;
-                    await Task.Delay(2000);
-                    InfoTextBox0_1.Visibility = Visibility.Hidden;
-                    break;
-
-                case "MagicStaff0":
-                    InfoTextBox0_2.Visibility = Visibility.Visible;
-                    await Task.Delay(2000);
-                    InfoTextBox0_2.Visibility = Visibility.Hidden;
-                    break;
-
-                case "HelmetBronze0":
-                    InfoTextBox1_0.Visibility = Visibility.Visible;
-                    await Task.Delay(2000);
-                    InfoTextBox1_0.Visibility = Visibility.Hidden;
-                    break;
-
-                case "HelmetIron0":
-                    InfoTextBox1_1.Visibility = Visibility.Visible;
-                    await Task.Delay(2000);
-                    InfoTextBox1_1.Visibility = Visibility.Hidden;
-                    break;
-
-                case "HelmetMythical0":
-                    InfoTextBox1_2.Visibility = Visibility.Visible;
-                    await Task.Delay(2000);
-                    InfoTextBox1_2.Visibility = Visibility.Hidden;
-                    break;
-
-                case "BreastplateBronze0":
-                    InfoTextBox2_0.Visibility = Visibility.Visible;
-                    await Task.Delay(2000);
-                    InfoTextBox2_0.Visibility = Visibility.Hidden;
-                    break;
-
-                case "BreastplateIron0":
-                    InfoTextBox2_1.Visibility = Visibility.Visible;
-                    await Task.Delay(2000);
-                    InfoTextBox2_1.Visibility = Visibility.Hidden;
-                    break;
-
-                case "BreastplateMythical0":
-                    InfoTextBox2_2.Visibility = Visibility.Visible;
-                    await Task.Delay(2000);
-                    InfoTextBox2_2.Visibility = Visibility.Hidden;
-                    break;
-            }
         }
     }
 }

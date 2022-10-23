@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using WarCraftIII_Logic;
 
@@ -197,7 +198,7 @@ namespace WarCraftIII_WPF
             }
         }
 
-        private void UnitImg_MouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e) // Changing a character with Scroll
+        private void UnitImg_MouseWheel(object sender, MouseWheelEventArgs e) // Changing a character with Scroll
         {
             if (e.Delta > 0)
             {
@@ -250,17 +251,19 @@ namespace WarCraftIII_WPF
             Close();
         }
 
-        private void ButtonBack_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        private void ButtonBack_MouseEnter(object sender, MouseEventArgs e)
         {
             ButtonBack.Source = new BitmapImage(new Uri("/img/iconBack2.png", UriKind.Relative));
+            Anim.AnimElementSize_MouseEnter((Image)sender);
         }
 
-        private void ButtonBack_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        private void ButtonBack_MouseLeave(object sender, MouseEventArgs e)
         {
             ButtonBack.Source = new BitmapImage(new Uri("/img/iconBack.png", UriKind.Relative));
+            Anim.AnimElementSize_MouseLeave((Image)sender);
         }
 
-        private void ProgressEx_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        private void ProgressEx_MouseEnter(object sender, MouseEventArgs e)
         {
             ProgressEx.Foreground = System.Windows.Media.Brushes.White;
             ProgressEx.Background = (System.Windows.Media.Brush)Application.Current.Resources["ProgressBarColorGradient"];
@@ -268,11 +271,21 @@ namespace WarCraftIII_WPF
             ExPlus_Label.Visibility = Visibility.Visible;
         }
 
-        private void ProgressEx_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        private void ProgressEx_MouseLeave(object sender, MouseEventArgs e)
         {
             ProgressEx.Foreground = (System.Windows.Media.Brush)Application.Current.Resources["ProgressBarColorGradient"];
             ProgressEx.Background = System.Windows.Media.Brushes.White;
             ExPlus_Label.Visibility = Visibility.Hidden;
+        }
+
+        private void AnimButton_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Anim.AnimElementSize_MouseEnter((Button)sender);
+        }
+
+        private void AnimElement_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Anim.AnimElementSize_MouseLeave((Button)sender);
         }
 
         // -----------------------------------------------------------------------------------------------------------------

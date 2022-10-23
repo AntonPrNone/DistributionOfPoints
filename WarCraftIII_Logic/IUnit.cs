@@ -30,7 +30,7 @@ namespace WarCraftIII_Logic
         // -----------------------------------------------------------------------------------------------------------------
         // -------------------------------------------------- *INVENTORY* --------------------------------------------------
 
-        void AddInventory(string loot);
+        bool AddInventory(string loot);
         void RemoveInventory(string loot);
         void ResetInventory();
         void EditInventory(List<string> inv);
@@ -46,9 +46,9 @@ namespace WarCraftIII_Logic
         // ----------------------------------------------- ^BUFF^ / ʌDEBUFFʌ -----------------------------------------------
 
         void DistributionBuff(string loot, char sign);
-        void BuffDebuffBow(char sign);
-        void BuffDebuffSword(char sign);
-        void BuffDebuffMagicStaff(char sign);
+        void BuffDebuffWeaponBow(char sign);
+        void BuffDebuffWeaponSword(char sign);
+        void BuffDebuffWeaponMagicStaff(char sign);
         void BuffDebuffHelmetBronze(char sign);
         void BuffDebuffHelmetIron(char sign);
         void BuffDebuffHelmetMythical(char sign);

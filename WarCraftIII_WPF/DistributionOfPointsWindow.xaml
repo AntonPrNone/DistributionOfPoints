@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WarCraftIII_WPF"
         mc:Ignorable="d"
         ContentRendered="Window_ContentRendered"
-        Title="Distribution of skill points. WarCraft |||" Height="450" Width="800" Visibility="Visible" WindowStartupLocation="CenterScreen" WindowStyle="SingleBorderWindow" BorderThickness="0,0,0,0" SizeToContent="Manual" Closed="Window_Closed" Background="{DynamicResource DefoultColor}" Icon="/img/icon.png">
+        Title="Distribution of skill points. WarCraft |||" Height="450" Width="800" Visibility="Visible" WindowStartupLocation="CenterScreen" WindowStyle="SingleBorderWindow" BorderThickness="0,0,0,0" SizeToContent="Manual" Closed="Window_Closed" Background="{DynamicResource DefoultColor}" Icon="/img/icon.png" ResizeMode="CanMinimize">
     <Window.Resources>
 
     </Window.Resources>
@@ -71,7 +71,7 @@
             <Label Content="PAttack:" HorizontalAlignment="Left" Margin="349,0,0,0" VerticalAlignment="Center" Foreground="#FF5A85F7" FontSize="14"/>
             <Label x:Name="PAttackLabel" Content="000" HorizontalAlignment="Left" Margin="419,0,0,0" VerticalAlignment="Center" Foreground="White" AutomationProperties.Name="PAttackLabel"/>
         </Grid>
-        <Button x:Name="ResetButton" Content="Reset" HorizontalAlignment="Center" Margin="0,175,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="White" BorderBrush="Red" Height="24" Width="44" Cursor="Hand" Click="ResetButton_Click"/>
+        <Button x:Name="ResetButton" Content="Reset" HorizontalAlignment="Center" Margin="0,175,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="White" BorderBrush="Red" Height="24" Width="44" Cursor="Hand" Click="ResetButton_Click" MouseEnter="AnimButton_MouseEnter" MouseLeave="AnimElement_MouseLeave"/>
         <Label Content="Skill points left:" HorizontalAlignment="Center" Margin="0,103,0,0" VerticalAlignment="Top" Foreground="White"/>
         <TextBox x:Name="SkillPointsTextBox" HorizontalAlignment="Center" Margin="0,134,0,0" Text="000" TextWrapping="Wrap" VerticalAlignment="Top" Width="58" TextAlignment="Center" FontSize="18"/>
         <Image x:Name="UnitImg" HorizontalAlignment="Left" Height="75" Margin="495,17,0,0" VerticalAlignment="Top" Width="75" Stretch="Fill" StretchDirection="Both" Source="/img/Warrior.png" MouseWheel="UnitImg_MouseWheel"/>
@@ -84,7 +84,7 @@
         <Button x:Name="ReduceDexterity_Button" Content="-" HorizontalAlignment="Left" Margin="151,169,0,0" VerticalAlignment="Top" Background="#FF950A00" FontSize="20" Height="36" Foreground="White" BorderBrush="#FF610600" Width="18" Click="ReduceDexterity_Button_Click" Cursor="Hand"/>
         <Button x:Name="ReduceConstitution_Button" Content="-" HorizontalAlignment="Left" Margin="151,239,0,0" VerticalAlignment="Top" Background="#FF950A00" FontSize="20" Height="36" Foreground="White" BorderBrush="#FF610600" Width="18" Click="ReduceConstitution_Button_Click" Cursor="Hand"/>
         <Button x:Name="ReduceIntelligence_Button" Content="-" HorizontalAlignment="Left" Margin="151,309,0,0" VerticalAlignment="Top" Background="#FF950A00" FontSize="20" Height="36" Foreground="White" BorderBrush="#FF610600" Width="18" Click="ReduceIntelligence_Button_Click" Cursor="Hand"/>
-        <Image x:Name="ButtonBack" Margin="0,20,20,0" Stretch="Fill" Source="/img/iconBack.png" Width="50" Height="50" HorizontalAlignment="Right" VerticalAlignment="Top" Cursor="Hand" MouseDown="ButtonBack_MouseDown" MouseEnter="ButtonBack_MouseEnter" MouseLeave="ButtonBack_MouseLeave"/>
+        <Image x:Name="ButtonBack" Margin="720,20,0,0" Stretch="Fill" Source="/img/iconBack.png" Width="50" Height="50" HorizontalAlignment="Left" VerticalAlignment="Top" Cursor="Hand" MouseDown="ButtonBack_MouseDown" MouseEnter="ButtonBack_MouseEnter" MouseLeave="ButtonBack_MouseLeave"/>
         <Grid HorizontalAlignment="Left" Height="26" Margin="76,45,0,0" VerticalAlignment="Top"  MouseEnter="ProgressEx_MouseEnter" MouseLeave="ProgressEx_MouseLeave">
             <ProgressBar x:Name="ProgressEx" HorizontalAlignment="Center" Height="38" VerticalAlignment="Center" Width="169" Orientation="Horizontal" Value="50" BorderBrush="#00BCBCBC">
                 <ProgressBar.Foreground>

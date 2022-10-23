@@ -54,15 +54,15 @@
     <Resource Include="img\Rogue.png" />
     <Resource Include="img\Warrior.png" />
     <Resource Include="img\Wizard.png" />
-    <Resource Include="img\loot\bow.png" />
-    <Resource Include="img\loot\sword.png" />
-    <Resource Include="img\loot\magicStaff.png" />
-    <Resource Include="img\loot\breastplateBronze.png" />
-    <Resource Include="img\loot\breastplateIron.png" />
-    <Resource Include="img\loot\breastplateMythical.png" />
-    <Resource Include="img\loot\helmetBronze.png" />
-    <Resource Include="img\loot\helmetIron.png" />
-    <Resource Include="img\loot\helmetMythical.png" />
+    <Resource Include="img\loot\WeaponBow.png" />
+    <Resource Include="img\loot\WeaponSword.png" />
+    <Resource Include="img\loot\WeaponMagicStaff.png" />
+    <Resource Include="img\loot\BreastplateBronze.png" />
+    <Resource Include="img\loot\BreastplateIron.png" />
+    <Resource Include="img\loot\BreastplateMythical.png" />
+    <Resource Include="img\loot\HelmetBronze.png" />
+    <Resource Include="img\loot\HelmetIron.png" />
+    <Resource Include="img\loot\HelmetMythical.png" />
   </ItemGroup>
 
 </Project>

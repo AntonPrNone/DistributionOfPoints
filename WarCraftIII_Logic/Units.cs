@@ -322,9 +322,15 @@ namespace WarCraftIII_Logic
 
         // -------------------------------------------------- *INVENTORY* --------------------------------------------------
 
-        public void AddInventory(string loot)
+        public bool AddInventory(string loot)
         {
-            if (!Inventory.Contains(loot)) Inventory.Add(loot);
+            if (!Inventory.Contains(loot))
+            {
+                Inventory.Add(loot);
+                return true;
+            }
+
+            else return false;
         }
 
         public void RemoveInventory(string loot)
@@ -392,16 +398,16 @@ namespace WarCraftIII_Logic
         {
             switch (loot)
             {
-                case "Bow":
-                    BuffDebuffBow(sign);
+                case "WeaponBow":
+                    BuffDebuffWeaponBow(sign);
                     break;
 
-                case "Sword":
-                    BuffDebuffSword(sign);
+                case "WeaponSword":
+                    BuffDebuffWeaponSword(sign);
                     break;
 
                 case "MagicStaff":
-                    BuffDebuffMagicStaff(sign);
+                    BuffDebuffWeaponMagicStaff(sign);
                     break;
 
                 case "HelmetBronze":
@@ -427,11 +433,10 @@ namespace WarCraftIII_Logic
                 case "BreastplateMythical":
                     BuffDebuffBreastplateMythical(sign);
                     break;
-
             }
         }
 
-        public void BuffDebuffBow(char sign)
+        public void BuffDebuffWeaponBow(char sign)
         {
             if (sign == '+')
             {
@@ -446,7 +451,7 @@ namespace WarCraftIII_Logic
             }
         }
 
-        public void BuffDebuffSword(char sign)
+        public void BuffDebuffWeaponSword(char sign)
         {
             if (sign == '+')
             {
@@ -459,7 +464,7 @@ namespace WarCraftIII_Logic
             }
         }
 
-        public void BuffDebuffMagicStaff(char sign)
+        public void BuffDebuffWeaponMagicStaff(char sign)
         {
             if (sign == '+')
             {
