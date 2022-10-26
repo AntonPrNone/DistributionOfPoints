@@ -6,9 +6,13 @@ namespace WarCraftIII_Logic
 {
     public class MongoExamples
     {
+        private const string ConnectStringLocal = "mongodb://localhost:27017";
+        private const string ConnectStringAtlas = "mongodb+srv://AntonPr:<password>@cluster0.o9nqv6x.mongodb.net";
+        private static string ConnectString = ConnectStringLocal;
+
         public static Unit Find(string name) // Returns a document
         {
-            var client = new MongoClient();
+            var client = new MongoClient(ConnectString);
             var database = client.GetDatabase("DB");
             var collection = database.GetCollection<Unit>("Units");
             var document = collection.Find(x => x.Name == name).FirstOrDefault();
@@ -17,7 +21,7 @@ namespace WarCraftIII_Logic
 
         public static List<string> FindMaxInventory() // Returns a document
         {
-            var client = new MongoClient();
+            var client = new MongoClient(ConnectString);
             var database = client.GetDatabase("DB");
             var collection = database.GetCollection<MaxInventory_Class>("Units");
             var document = collection.Find(x => x.Name == "MaxInventory").FirstOrDefault();
@@ -26,7 +30,7 @@ namespace WarCraftIII_Logic
 
         public static void SaveValues(string name, Unit unit) // Replaces the document
         {
-            var client = new MongoClient();
+            var client = new MongoClient(ConnectString);
             var database = client.GetDatabase("DB");
             var collection = database.GetCollection<Unit>("Units");
             collection.ReplaceOne(x => x.Name == name, unit);

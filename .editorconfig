@@ -2,3 +2,9 @@
 
 # IDE0044: Добавить модификатор только для чтения
 dotnet_diagnostic.IDE0044.severity = none
+
+# IDE0051: Удалите неиспользуемые закрытые члены
+dotnet_diagnostic.IDE0051.severity = none
+
+# CS0414: Полю "MongoExamples.ConnectStringLocal" присвоено значение, но оно ни разу не использовано.
+dotnet_diagnostic.CS0414.severity = none
